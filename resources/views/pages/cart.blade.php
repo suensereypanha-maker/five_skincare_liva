@@ -202,7 +202,7 @@
 
 @push('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    function initClientBag() {
         var emptyView = document.getElementById('liva-cart-empty-view');
         var dynamicView = document.getElementById('liva-cart-dynamic-view');
         var tbody = document.getElementById('liva-cart-dynamic-tbody');
@@ -308,6 +308,13 @@
         }
 
         renderClientBag();
-    });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initClientBag);
+    } else {
+        initClientBag();
+    }
+    window.addEventListener('pageshow', initClientBag);
 </script>
 @endpush

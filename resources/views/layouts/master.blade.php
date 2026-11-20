@@ -125,7 +125,7 @@
     </script>
 
     <div id="cart-toast" role="status" aria-live="polite"
-        style="display:none; position:fixed; right:20px; bottom:20px; z-index:9999; max-width:320px; background:#1c1c1c; color:#fff; border-left:4px solid #7fad39; border-radius:6px; padding:12px 16px; box-shadow:0 4px 16px rgba(0,0,0,.18);">
+        style="display:none; position:fixed; top:25px; right:25px; z-index:99999; min-width:280px; max-width:420px; background:#1F2421; color:#fff; border-left:5px solid #7fad39; border-radius:8px; padding:14px 20px; box-shadow:0 8px 24px rgba(0,0,0,.25); font-size:14px;">
     </div>
 
     <script>
@@ -160,7 +160,6 @@
                 var catalog = getCatalog();
                 var product = catalog[productId];
                 if (!product) {
-                    // Try to search by matching id loosely
                     for (var k in catalog) {
                         if (String(catalog[k].id) === String(productId)) {
                             product = catalog[k];
@@ -257,16 +256,16 @@
         })();
 
         (function () {
-            function showCartToast(message, isError) {
+            function showCartToast(htmlContent, isError) {
                 var toast = document.getElementById('cart-toast');
                 if (!toast) return;
-                toast.textContent = message;
+                toast.innerHTML = htmlContent;
                 toast.style.borderLeftColor = isError ? '#dc3545' : '#7fad39';
                 toast.style.display = 'block';
                 window.clearTimeout(toast._hideTimer);
                 toast._hideTimer = window.setTimeout(function () {
                     toast.style.display = 'none';
-                }, 3000);
+                }, 4500);
             }
 
             function updateCartIndicators(cartCount, cartSubtotal) {
@@ -278,10 +277,18 @@
                 });
             }
 
-            // Sync indicators from localStorage if client cart has items
-            if (window.LivaCart && window.LivaCart.getCount() > 0) {
-                window.LivaCart.syncUI();
+            function syncIndicators() {
+                if (window.LivaCart && window.LivaCart.getCount() > 0) {
+                    window.LivaCart.syncUI();
+                }
             }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', syncIndicators);
+            } else {
+                syncIndicators();
+            }
+            window.addEventListener('pageshow', syncIndicators);
 
             document.addEventListener('submit', function (event) {
                 var form = event.target;
@@ -300,6 +307,24 @@
                 var productId = formData.get('product_id');
                 var quantity = parseInt(formData.get('quantity'), 10) || 1;
                 var csrfMeta = document.querySelector('meta[name="csrf-token"]');
+                var isStatic = window.location.hostname.indexOf('github.io') !== -1 || window.location.protocol === 'file:';
+                var cartUrl = '{{ route("cart.index") }}';
+
+                if (isStatic) {
+                    var added = window.LivaCart ? window.LivaCart.addItem(productId, quantity) : null;
+                    var name = added ? added.name : 'Botanical Skincare item';
+                    showCartToast(
+                        '<div><strong>✓ Added to your bag!</strong>' +
+                        '<div style="font-size:12px; opacity:0.85; margin:4px 0 10px;">' + name + ' (Qty: ' + quantity + ')</div>' +
+                        '<a href="' + cartUrl + '" style="display:inline-block; background:#7fad39; color:#fff; padding:6px 14px; border-radius:20px; font-weight:700; font-size:12px; text-decoration:none;">View Bag &amp; Checkout &rarr;</a>' +
+                        '</div>',
+                        false
+                    );
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                    }
+                    return;
+                }
 
                 fetch(form.action, {
                     method: 'POST',
@@ -321,16 +346,24 @@
                         throw new Error(data.message || 'Unable to add this item to your bag.');
                     }
                     updateCartIndicators(data.cart_count, data.cart_subtotal);
-                    showCartToast(data.message, false);
+                    showCartToast(
+                        '<div><strong>✓ ' + data.message + '</strong>' +
+                        '<div style="margin-top:8px;">' +
+                        '<a href="' + cartUrl + '" style="display:inline-block; background:#7fad39; color:#fff; padding:6px 14px; border-radius:20px; font-weight:700; font-size:12px; text-decoration:none;">View Bag &amp; Checkout &rarr;</a>' +
+                        '</div></div>',
+                        false
+                    );
                 })
                 .catch(function () {
-                    // Fallback to client-side localStorage cart for static preview environments like GitHub Pages
                     var added = window.LivaCart ? window.LivaCart.addItem(productId, quantity) : null;
-                    if (added) {
-                        showCartToast('Added ' + added.name + ' to your bag!', false);
-                    } else {
-                        showCartToast('Added item to your botanical bag!', false);
-                    }
+                    var name = added ? added.name : 'Botanical Skincare item';
+                    showCartToast(
+                        '<div><strong>✓ Added to your bag!</strong>' +
+                        '<div style="font-size:12px; opacity:0.85; margin:4px 0 10px;">' + name + ' (Qty: ' + quantity + ')</div>' +
+                        '<a href="' + cartUrl + '" style="display:inline-block; background:#7fad39; color:#fff; padding:6px 14px; border-radius:20px; font-weight:700; font-size:12px; text-decoration:none;">View Bag &amp; Checkout &rarr;</a>' +
+                        '</div>',
+                        false
+                    );
                 })
                 .finally(function () {
                     if (submitButton) {
