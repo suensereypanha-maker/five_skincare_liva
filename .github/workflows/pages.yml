@@ -24,7 +24,6 @@ jobs:
       APP_URL: https://suensereypanha-maker.github.io/five_skincare_liva
       ASSET_URL: https://suensereypanha-maker.github.io/five_skincare_liva
       DB_CONNECTION: sqlite
-      DB_DATABASE: database/database.sqlite
       SESSION_DRIVER: file
       CACHE_STORE: file
       QUEUE_CONNECTION: sync
@@ -35,8 +34,8 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
-          extensions: pdo_sqlite, sqlite3
+          php-version: '8.4'
+          extensions: pdo_sqlite, sqlite3, mbstring, ctype, fileinfo, xml
           tools: composer:v2
 
       - name: Set up Node
@@ -53,6 +52,7 @@ jobs:
           cp .env.example .env
           composer install --no-dev --prefer-dist --no-interaction --no-progress
           php artisan key:generate --force
+          mkdir -p database
           touch database/database.sqlite
           php artisan migrate --force
 
@@ -61,10 +61,12 @@ jobs:
           npm ci
           npm run build
 
-      - name: Render homepage and collect static assets
+      - name: Render pages and collect static assets
         run: |
           mkdir -p site
-          cp -R public/css public/js public/img public/fonts public/video public/build site/
+          cp -r public/* site/
+          rm -f site/index.php
+
           php artisan serve --host=127.0.0.1 --port=8000 > /tmp/liva-pages-server.log 2>&1 &
           server_pid=$!
           trap 'kill "$server_pid" 2>/dev/null || true' EXIT
@@ -81,7 +83,38 @@ jobs:
             exit 1
           fi
 
-          sed -i 's#http://127.0.0.1:8000#https://suensereypanha-maker.github.io/five_skincare_liva#g' site/index.html
+          pages=(
+            "shop"
+            "shop-details"
+            "cart"
+            "checkout"
+            "contact"
+            "blog"
+            "blog-details"
+            "login"
+            "register"
+          )
+
+          for p in "${pages[@]}"; do
+            mkdir -p "site/$p"
+            curl --fail --silent "http://127.0.0.1:8000/$p" --output "site/$p/index.html" || true
+            cp "site/$p/index.html" "site/$p.html" 2>/dev/null || true
+          done
+
+          for id in $(seq 0 9); do
+            mkdir -p "site/shop/$id"
+            curl --fail --silent "http://127.0.0.1:8000/shop/$id" --output "site/shop/$id/index.html" || true
+            cp "site/shop/$id/index.html" "site/shop/$id.html" 2>/dev/null || true
+          done
+
+          for id in 1 2 3; do
+            mkdir -p "site/blog/$id"
+            curl --fail --silent "http://127.0.0.1:8000/blog/$id" --output "site/blog/$id/index.html" || true
+            cp "site/blog/$id/index.html" "site/blog/$id.html" 2>/dev/null || true
+          done
+
+          find site -type f -name "*.html" -exec sed -i 's#http://127.0.0.1:8000#https://suensereypanha-maker.github.io/five_skincare_liva#g' {} +
+          cp site/index.html site/404.html
           touch site/.nojekyll
 
       - name: Upload Pages artifact
