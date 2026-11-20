@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="LIVA Botanical Skincare">
+    <meta name="keywords" content="LIVA, skincare, botanical, beauty, organic">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="6yrFqJvpuBYswHQRpTW3kktxNsVjEoWBigFb26Vr">
+    <link rel="icon" type="image/svg+xml" href="https://suensereypanha-maker.github.io/five_skincare_liva/img/favicon.svg">
+    <title>LIVA | The Botanical Ritual: Why Scalp Health Comes First</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&amp;display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="https://suensereypanha-maker.github.io/five_skincare_liva/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://suensereypanha-maker.github.io/five_skincare_liva/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="https://suensereypanha-maker.github.io/five_skincare_liva/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="https://suensereypanha-maker.github.io/five_skincare_liva/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="https://suensereypanha-maker.github.io/five_skincare_liva/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="https://suensereypanha-maker.github.io/five_skincare_liva/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="https://suensereypanha-maker.github.io/five_skincare_liva/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="https://suensereypanha-maker.github.io/five_skincare_liva/css/style.css" type="text/css">
+
+    <script id="browser-logger-active">
+(function() {
+    const ENDPOINT = 'https://suensereypanha-maker.github.io/five_skincare_liva/_boost/browser-logs';
+    const logQueue = [];
+    let flushTimeout = null;
+    const captureTypes = ["error","warning","info","log","debug","table"];
+
+    console.log('🔍 Browser logger active (MCP server detected). Posting to: ' + ENDPOINT);
+
+    // Store original console methods
+    const originalConsole = {
+        log: console.log,
+        debug: console.debug,
+        info: console.info,
+        error: console.error,
+        warn: console.warn,
+        table: console.table
+    };
+
+    // Walk own enumerable keys so JSON.stringify cannot auto-invoke a proxy fake toJSON (e.g. Livewire's `$wire`) and fire a real request.
+    function toSafeValue(value, seen) {
+        if (value === null || typeof value !== 'object') {
+            return value;
+        }
+        if (value instanceof Error) {
+            return { name: value.name, message: value.message, stack: value.stack };
+        }
+        // Date has no own enumerable keys, so the walk below would collapse it to {}.
+        if (value instanceof Date) {
+            return value.toISOString();
+        }
+        if (seen.has(value)) {
+            return '[Circular]';
+        }
+        seen.add(value);
+        if (Array.isArray(value)) {
+            return value.map((item) => toSafeValue(item, seen));
+        }
+        const plain = {};
+        for (const key of Object.keys(value)) {
+            if (key === 'toJSON') continue;
+            try {
+                plain[key] = toSafeValue(value[key], seen);
+            } catch (e) {
+                plain[key] = '[Unreadable]';
+            }
+        }
+        return plain;
+    }
+
+    // Helper to safely stringify values
+    function safeStringify(obj) {
+        return JSON.stringify(toSafeValue(obj, new WeakSet()));
+    }
+
+    // Normalize log type for consistency (e.g., 'warn' to 'warning')
+    function normalizeType(type) {
+        return type === 'warn' ? 'warning' : type;
+    }
+
+    // Determine if a log type should be captured based on configured levels
+    function shouldCapture(type) {
+        return captureTypes.includes(normalizeType(type));
+    }
+
+    // Batch and send logs
+    function flushLogs() {
+        if (logQueue.length === 0) return;
+
+        const batch = logQueue.splice(0, logQueue.length);
+
+        fetch(ENDPOINT, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify({ logs: batch })
+        }).catch(err => {
+            // Silently fail to avoid infinite loops
+            originalConsole.error('Failed to send logs:', err);
+        });
+    }
+
+    // Debounced flush (100ms)
+    function scheduleFlush() {
+        if (flushTimeout) clearTimeout(flushTimeout);
+        flushTimeout = setTimeout(flushLogs, 100);
+    }
+
+    // Intercept console methods
+    ['log', 'debug', 'info', 'error', 'warn', 'table'].forEach(method => {
+        console[method] = function(...args) {
+            // Call original method
+            originalConsole[method].apply(console, args);
+
+            // Capture log data
+            try {
+                if (!shouldCapture(method)) {
+                    return;
+                }
+
+                logQueue.push({
+                    type: method,
+                    timestamp: new Date().toISOString(),
+                    data: args.map(arg => {
+                        try {
+                            return typeof arg === 'object' ? JSON.parse(safeStringify(arg)) : arg;
+                        } catch (e) {
+                            return String(arg);
+                        }
+                    }),
+                    url: window.location.href,
+                    userAgent: navigator.userAgent
+                });
+
+                scheduleFlush();
+            } catch (e) {
+                // Fail silently
+            }
+        };
+    });
+
+    // Global error handlers for uncaught errors
+    const originalOnError = window.onerror;
+    window.onerror = function boostErrorHandler(errorMsg, url, lineNumber, colNumber, error) {
+        try {
+            if (shouldCapture('error')) {
+                logQueue.push({
+                    type: 'uncaught_error',
+                    timestamp: new Date().toISOString(),
+                    data: [{
+                        message: errorMsg,
+                        filename: url,
+                        lineno: lineNumber,
+                        colno: colNumber,
+                        error: error ? {
+                            name: error.name,
+                            message: error.message,
+                            stack: error.stack
+                        } : null
+                    }],
+                    url: window.location.href,
+                    userAgent: navigator.userAgent
+                });
+
+                scheduleFlush();
+            }
+
+        } catch (e) {
+            // Fail silently
+        }
+
+        // Call original handler if it exists
+        if (originalOnError && typeof originalOnError === 'function') {
+            return originalOnError(errorMsg, url, lineNumber, colNumber, error);
+        }
+
+        // Let the error continue to propagate
+        return false;
+    }
+    window.addEventListener('error', (event) => {
+        try {
+            if (!shouldCapture('error')) {
+                return false;
+            }
+
+            logQueue.push({
+                type: 'window_error',
+                timestamp: new Date().toISOString(),
+                data: [{
+                    message: event.message,
+                    filename: event.filename,
+                    lineno: event.lineno,
+                    colno: event.colno,
+                    error: event.error ? {
+                        name: event.error.name,
+                        message: event.error.message,
+                        stack: event.error.stack
+                    } : null
+                }],
+                url: window.location.href,
+                userAgent: navigator.userAgent
+            });
+
+            scheduleFlush();
+        } catch (e) {
+            // Fail silently
+        }
+
+        // Let the error continue to propagate
+        return false;
+    });
+    window.addEventListener('unhandledrejection', (event) => {
+        try {
+            if (!shouldCapture('error')) {
+                return false;
+            }
+
+            logQueue.push({
+                type: 'error',
+                timestamp: new Date().toISOString(),
+                data: [{
+                    message: 'Unhandled Promise Rejection',
+                    reason: toSafeValue(event.reason, new WeakSet())
+                }],
+                url: window.location.href,
+                userAgent: navigator.userAgent
+            });
+
+            scheduleFlush();
+        } catch (e) {
+            // Fail silently
+        }
+
+        // Let the rejection continue to propagate
+        return false;
+    });
+
+    // Flush on page unload
+    window.addEventListener('beforeunload', () => {
+        if (logQueue.length > 0) {
+            navigator.sendBeacon(ENDPOINT, JSON.stringify({ logs: logQueue }));
+        }
+    });
+})();
+</script>
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Humberger Begin -->
+    <div class="humberger__menu__overlay"></div>
+<div class="humberger__menu__wrapper">
+    <div class="humberger__menu__logo">
+        <a href="https://suensereypanha-maker.github.io/five_skincare_liva" class="d-flex align-items-center" style="gap: 10px; text-decoration: none;">
+            <img src="https://suensereypanha-maker.github.io/five_skincare_liva/img/favicon.svg" alt="LIVA" style="max-height: 40px; width: 40px; border-radius: 8px;">
+            <span style="font-size: 24px; font-weight: 700; letter-spacing: 0.12em; color: #1F2421; font-family: 'Cormorant Garamond', Georgia, serif;">LIVA</span>
+        </a>
+    </div>
+    <div class="humberger__menu__cart">
+        <ul>
+            <li><a href="https://suensereypanha-maker.github.io/five_skincare_liva/shop"><i class="fa fa-heart"></i> <span>1</span></a></li>
+            <li>
+                <a href="https://suensereypanha-maker.github.io/five_skincare_liva/cart">
+                    <i class="fa fa-shopping-bag"></i>
+                    <span class="cart-badge-count">0</span>
+                </a>
+            </li>
+        </ul>
+        <div class="header__cart__price">
+            bag: <span class="cart-badge-total">$0.00</span>
+        </div>
+    </div>
+    <div class="humberger__menu__widget">
+        <div class="header__top__right__language">
+            <div>English</div>
+            <span class="arrow_carrot-down"></span>
+            <ul>
+                <li><a href="#">English</a></li>
+                <li><a href="#">Khmer</a></li>
+            </ul>
+        </div>
+        <div class="header__top__right__auth">
+                            <a href="https://suensereypanha-maker.github.io/five_skincare_liva/login" style="display: inline-block; font-weight: 600; color: #1c1c1c;"><i class="fa fa-user mr-1"></i> Login</a>
+                <span style="margin: 0 6px; color: #bbb;">/</span>
+                <a href="https://suensereypanha-maker.github.io/five_skincare_liva/register" style="display: inline-block; font-weight: 600; color: #7fad39;">Register</a>
+                    </div>
+    </div>
+    <nav class="humberger__menu__nav mobile-menu">
+        <ul>
+            <li class=""><a href="https://suensereypanha-maker.github.io/five_skincare_liva">Home</a></li>
+            <li class=""><a href="https://suensereypanha-maker.github.io/five_skincare_liva/shop">Shop</a></li>
+            <li class=""><a href="#">Pages</a>
+                <ul class="header__menu__dropdown">
+                    <li><a href="https://suensereypanha-maker.github.io/five_skincare_liva/shop">Botanical Shop</a></li>
+                    <li><a href="https://suensereypanha-maker.github.io/five_skincare_liva/cart">Shopping Bag</a></li>
+                    <li><a href="https://suensereypanha-maker.github.io/five_skincare_liva/checkout">Check Out</a></li>
+                    <li><a href="https://suensereypanha-maker.github.io/five_skincare_liva/blog">Skincare Journal</a></li>
+                </ul>
+            </li>
+            <li class="active"><a href="https://suensereypanha-maker.github.io/five_skincare_liva/blog">Blog</a></li>
+            <li class=""><a href="https://suensereypanha-maker.github.io/five_skincare_liva/contact">Contact</a></li>
+        </ul>
+    </nav>
+    <div id="mobile-menu-wrap"></div>
+    <div class="header__top__right__social">
+        <a href="#"><i class="fa fa-facebook"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-linkedin"></i></a>
+        <a href="#"><i class="fa fa-instagram"></i></a>
+    </div>
+    <div class="humberger__menu__contact">
+        <ul>
+            <li><i class="fa fa-envelope"></i> care@livaskincare.com</li>
+            <li>Free Botanical Shipping for all Orders over $50</li>
+        </ul>
+    </div>
+</div>
+    <!-- Humberger End -->
+
+
+
+    <!-- Hero Section Begin -->
+        <section class="hero hero-normal" style="margin-top: 25px; padding-bottom: 30px;">
+    <div class="container">
+        
+        <div class="hero__brand-header d-flex align-items-center justify-content-between mb-4 flex-wrap" style="gap: 15px; border-bottom: 1px solid #f0f3eb; padding-bottom: 16px;">
+            <div class="hero__brand-logo">
+                <a href="https://suensereypanha-maker.github.io/five_skincare_liva" class="d-flex align-items-center" style="gap: 12px; text-decoration: none;" title="LIVA Botanical Skincare - Click to Home">
+                    <img src="https://suensereypanha-maker.github.io/five_skincare_liva/img/favicon.svg" alt="LIVA" style="height: 44px; width: 44px; border-radius: 8px;">
+                    <div>
+                        <span style="font-size: 26px; font-weight: 700; letter-spacing: 0.12em; color: #1F2421; font-family: 'Cormorant Garamond', Georgia, serif; line-height: 1; display: block;">LIVA</span>
+                        <span style="font-size: 11px; letter-spacing: 0.15em; color: #7fad39; text-transform: uppercase; font-weight: 600;">Botanical Skincare</span>
+                    </div>
+                </a>
+            </div>
+            <nav class="hero__brand-nav d-none d-md-flex align-items-center" style="gap: 28px;">
+                <a href="https://suensereypanha-maker.github.io/five_skincare_liva" class="d-flex align-items-center" style="font-size: 14px; font-weight: 600; color: #333; text-decoration: none; letter-spacing: 0.5px;">
+                    <i class="fa fa-home mr-1"></i> HOME
+                </a>
+                <a href="https://suensereypanha-maker.github.io/five_skincare_liva/shop" style="font-size: 14px; font-weight: 600; color: #333; text-decoration: none; letter-spacing: 0.5px;">
+                    SHOP
+                </a>
+                <a href="https://suensereypanha-maker.github.io/five_skincare_liva/cart" style="font-size: 14px; font-weight: 600; color: #333; text-decoration: none; letter-spacing: 0.5px;">
+                    BAG (<span class="cart-nav-count">0</span>)
+                </a>
+                <a href="https://suensereypanha-maker.github.io/five_skincare_liva/checkout" style="font-size: 14px; font-weight: 600; color: #333; text-decoration: none; letter-spacing: 0.5px;">
+                    CHECKOUT
+                </a>
+                <a href="https://suensereypanha-maker.github.io/five_skincare_liva/blog" style="font-size: 14px; font-weight: 700; color: #7fad39; text-decoration: none; letter-spacing: 0.5px;">
+                    JOURNAL
+                </a>
+                <a href="https://suensereypanha-maker.github.io/five_skincare_liva/contact" style="font-size: 14px; font-weight: 600; color: #333; text-decoration: none; letter-spacing: 0.5px;">
+                    CONTACT
+                </a>
+            </nav>
+        </div>
+
+        <div class="row">
+            
+            </div>
+            <div class="col-lg-12">
+                <div class="hero__search d-flex align-items-center justify-content-between flex-wrap" style="margin-bottom: 30px; overflow: visible; gap: 15px;">
+                    
+                    <div class="hero__search__form-modern" style="flex: 1 1 320px; max-width: 480px;">
+                        <form action="https://suensereypanha-maker.github.io/five_skincare_liva/shop" method="GET" style="display: flex; align-items: center; background: #ffffff; border: 2px solid #7fad39; border-radius: 30px; height: 48px; overflow: hidden; padding-left: 16px; box-shadow: 0 2px 8px rgba(127,173,57,0.12); margin: 0;">
+                            <i class="fa fa-search" style="color: #7fad39; font-size: 15px; margin-right: 10px;"></i>
+                            <input type="text" name="search" value="" placeholder="Search botanical skincare, hair care, oils..." style="flex: 1; border: none; outline: none; background: transparent; font-size: 14px; color: #1c1c1c; padding: 0 6px; height: 100%;">
+                                                        <button type="submit" style="background: #7fad39; color: #ffffff; border: none; height: 100%; padding: 0 24px; font-weight: 700; font-size: 13px; letter-spacing: 1px; cursor: pointer; transition: background 0.3s; display: flex; align-items: center; justify-content: center;">
+                                SEARCH
+                            </button>
+                        </form>
+                    </div>
+
+                    
+                    <div class="hero__search__phone d-flex align-items-center" style="float: none; margin: 0;">
+                        <div class="hero__search__phone__icon" style="float: none; margin-right: 12px;">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <div class="hero__search__phone__text">
+                            <h5 style="font-size: 14px; margin-bottom: 2px;">+65 11.188.888</h5>
+                            <span style="font-size: 12px;">support 24/7 time</span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="hero__search__auth d-flex align-items-center" style="margin-left: auto; gap: 10px;">
+                        
+                        <a href="https://suensereypanha-maker.github.io/five_skincare_liva/cart" class="d-flex align-items-center" style="text-decoration: none; padding: 7px 12px; background: #f5f5f5; border-radius: 25px; transition: all 0.3s;" title="View Shopping Bag">
+                            <div style="position: relative; margin-right: 8px; color: #1c1c1c;">
+                                <i class="fa fa-shopping-bag" style="font-size: 16px;"></i>
+                                <span class="badge badge-success cart-badge-count" style="position: absolute; top: -8px; right: -10px; font-size: 10px; background-color: #7fad39; border-radius: 50%; min-width: 16px; height: 16px; line-height: 14px; padding: 1px 3px;">
+                                    0
+                                </span>
+                            </div>
+                            <span class="cart-badge-total font-weight-bold" style="font-size: 13px; color: #1c1c1c;">
+                                $0.00
+                            </span>
+                        </a>
+
+                        
+                                                    <div class="d-flex align-items-center" style="gap: 8px;">
+                                <a href="https://suensereypanha-maker.github.io/five_skincare_liva/login" class="btn" style="border: 1px solid #7fad39; color: #7fad39; font-weight: 700; font-size: 13px; padding: 8px 16px; border-radius: 25px; text-decoration: none; line-height: 1.2;">
+                                    <i class="fa fa-user mr-1"></i> Login
+                                </a>
+                                <a href="https://suensereypanha-maker.github.io/five_skincare_liva/register" class="btn" style="background: #7fad39; color: #ffffff; font-weight: 700; font-size: 13px; padding: 8px 16px; border-radius: 25px; text-decoration: none; line-height: 1.2; box-shadow: 0 2px 6px rgba(127,173,57,0.3);">
+                                    Register
+                                </a>
+                            </div>
+                                            </div>
+                </div>
+
+                            </div>
+        </div>
+    </div>
+</section>
+    <!-- Hero Section End -->
+
+    <!-- Breadcrumb Section Begin -->
+        <!-- Breadcrumb Section End -->
+
+    <!-- Flash Messages -->
+    
+    <!-- Main Content Begin -->
+        <!-- Blog Details Hero Begin -->
+    <section class="blog-details-hero set-bg" >
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="blog__details__hero__text">
+                        <h2>The Botanical Ritual: Why Scalp Health Comes First</h2>
+                        <ul>
+                            <li>By Dr. Elena Vance</li>
+                            <li>March 18, 2026</li>
+                            <li>8 Botanical Comments</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Details Hero End -->
+
+    <!-- Blog Details Section Begin -->
+    <section class="blog-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-5 order-md-1 order-2">
+                    <div class="blog__sidebar">
+                        <div class="blog__sidebar__search">
+                            <form action="#">
+                                <input type="text" placeholder="Search journal...">
+                                <button type="submit"><span class="icon_search"></span></button>
+                            </form>
+                        </div>
+                        <div class="blog__sidebar__item">
+                            <h4>Journal Topics</h4>
+                            <ul>
+                                <li><a href="#">All Articles (18)</a></li>
+                                <li><a href="#">Botanical Care (8)</a></li>
+                                <li><a href="#">Skin Longevity (4)</a></li>
+                                <li><a href="#">Scalp Rituals (3)</a></li>
+                                <li><a href="#">Clean Formulations (3)</a></li>
+                            </ul>
+                        </div>
+                        <div class="blog__sidebar__item">
+                            <h4>Recent Articles</h4>
+                            <div class="blog__sidebar__recent">
+                                <a href="https://suensereypanha-maker.github.io/five_skincare_liva/blog-details" class="blog__sidebar__recent__item">
+                                    <div class="blog__sidebar__recent__item__pic">
+                                        <img src="https://suensereypanha-maker.github.io/five_skincare_liva/img/daily-edit.webp" alt="" style="width: 70px; height: 70px; object-fit: cover; border-radius: 4px;">
+                                    </div>
+                                    <div class="blog__sidebar__recent__item__text">
+                                        <h6>Why Balancing Scalp Health<br /> Transforms Hair Shine</h6>
+                                        <span>MAR 15, 2026</span>
+                                    </div>
+                                </a>
+                                <a href="https://suensereypanha-maker.github.io/five_skincare_liva/blog-details" class="blog__sidebar__recent__item">
+                                    <div class="blog__sidebar__recent__item__pic">
+                                        <img src="https://suensereypanha-maker.github.io/five_skincare_liva/img/ritual-duo.webp" alt="" style="width: 70px; height: 70px; object-fit: cover; border-radius: 4px;">
+                                    </div>
+                                    <div class="blog__sidebar__recent__item__text">
+                                        <h6>Plant Ceramides vs Lipids:<br /> Barrier Restoration Guide</h6>
+                                        <span>MAR 12, 2026</span>
+                                    </div>
+                                </a>
+                                <a href="https://suensereypanha-maker.github.io/five_skincare_liva/blog-details" class="blog__sidebar__recent__item">
+                                    <div class="blog__sidebar__recent__item__pic">
+                                        <img src="https://suensereypanha-maker.github.io/five_skincare_liva/img/travel-set.webp" alt="" style="width: 70px; height: 70px; object-fit: cover; border-radius: 4px;">
+                                    </div>
+                                    <div class="blog__sidebar__recent__item__text">
+                                        <h6>Travel-Proof Skincare:<br /> Combating Cabin Dryness</h6>
+                                        <span>MAR 08, 2026</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="blog__sidebar__item">
+                            <h4>Search By Tag</h4>
+                            <div class="blog__sidebar__item__tags">
+                                <a href="#">Botanical</a>
+                                <a href="#">Clean Beauty</a>
+                                <a href="#">Scalp Health</a>
+                                <a href="#">Hydration</a>
+                                <a href="#">Vegan Formula</a>
+                                <a href="#">Minimal Routine</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-7 order-md-1 order-1">
+                    <div class="blog__details__text">
+                        <img src="https://suensereypanha-maker.github.io/five_skincare_liva/img/campaign/everyday-poster.webp" alt="" style="border-radius: 8px;">
+                        <p>Healthy, vibrant hair does not begin at the ends—it starts beneath the surface. The scalp is a living ecosystem of skin cells, sebaceous glands, and a delicate microbiome that thrives only when properly balanced and shielded from harsh chemical detergents.</p>
+                        <h3>The Living Ecosystem: Why Traditional Sulfates Deplete Your Roots</h3>
+                        <p>When conventional shampoos strip away the protective lipid mantel with harsh foaming agents, the sebaceous glands overcompensate by pumping out excessive sebum. This vicious cycle results in roots that become greasy within hours while hair strands remain parched and brittle.</p>
+                        <p>LIVA botanical formulas solve this fundamental imbalance by utilizing cold-pressed plant surfactants derived from sustainable coconut and chamomile. They dislodge impurities without disrupting the pH equilibrium, creating the ideal biological environment for strong, resilient hair growth.</p>
+                    </div>
+                    <div class="blog__details__content">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="blog__details__author">
+                                    <div class="blog__details__author__pic">
+                                        <img src="https://suensereypanha-maker.github.io/five_skincare_liva/img/result-1.webp" alt="" style="border-radius: 50%;">
+                                    </div>
+                                    <div class="blog__details__author__text">
+                                        <h6>Dr. Elena Vance</h6>
+                                        <span>Botanical Dermatologist</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="blog__details__widget">
+                                    <ul>
+                                        <li><span>Categories:</span> Botanical Care, Scalp Rituals</li>
+                                        <li><span>Tags:</span> Clean Beauty, Organic, Scalp Care</li>
+                                    </ul>
+                                    <div class="blog__details__social">
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                        <a href="#"><i class="fa fa-instagram"></i></a>
+                                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Details Section End -->
+
+    <!-- Related Blog Section Begin -->
+    <section class="related-blog spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title related-blog-title">
+                        <h2>Articles You May Like</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic">
+                            <img src="https://suensereypanha-maker.github.io/five_skincare_liva/img/campaign/your-moment.webp" alt="" style="border-radius: 8px;">
+                        </div>
+                        <div class="blog__item__text">
+                            <ul>
+                                <li><i class="fa fa-calendar-o"></i> Mar 10, 2026</li>
+                                <li><i class="fa fa-comment-o"></i> 4</li>
+                            </ul>
+                            <h5><a href="https://suensereypanha-maker.github.io/five_skincare_liva/blog-details">Morning to Evening: Building a Minimalist Routine</a></h5>
+                            <p>Less is more when using concentrated botanicals. Learn our simple three-step ritual for round-the-clock radiance.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic">
+                            <img src="https://suensereypanha-maker.github.io/five_skincare_liva/img/campaign/hair-pair.webp" alt="" style="border-radius: 8px;">
+                        </div>
+                        <div class="blog__item__text">
+                            <ul>
+                                <li><i class="fa fa-calendar-o"></i> Mar 14, 2026</li>
+                                <li><i class="fa fa-comment-o"></i> 12</li>
+                            </ul>
+                            <h5><a href="https://suensereypanha-maker.github.io/five_skincare_liva/blog-details">Plant Squalane vs Argan: Choosing What Fits Your Skin</a></h5>
+                            <p>An in-depth look into lipid structures and how olive squalane provides instant cellular barrier reinforcement.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic">
+                            <img src="https://suensereypanha-maker.github.io/five_skincare_liva/img/result-2.jpg" alt="" style="border-radius: 8px;">
+                        </div>
+                        <div class="blog__item__text">
+                            <ul>
+                                <li><i class="fa fa-calendar-o"></i> Mar 06, 2026</li>
+                                <li><i class="fa fa-comment-o"></i> 9</li>
+                            </ul>
+                            <h5><a href="https://suensereypanha-maker.github.io/five_skincare_liva/blog-details">Why Amber Glass Bottles Preserve Botanical Actives</a></h5>
+                            <p>Understanding photo-oxidation and how sustainable amber containers shield delicate plant terpenes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Related Blog Section End -->
+    <!-- Main Content End -->
+
+    <!-- Footer Section Begin -->
+    <footer class="footer spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="footer__about">
+                    <div class="footer__about__logo">
+                        <a href="https://suensereypanha-maker.github.io/five_skincare_liva" class="d-flex align-items-center" style="gap: 10px; text-decoration: none;">
+                            <img src="https://suensereypanha-maker.github.io/five_skincare_liva/img/favicon.svg" alt="LIVA" style="max-height: 44px; width: 44px; border-radius: 8px;">
+                            <span style="font-size: 26px; font-weight: 700; letter-spacing: 0.12em; color: #1F2421; font-family: 'Cormorant Garamond', Georgia, serif;">LIVA</span>
+                        </a>
+                    </div>
+                    <ul>
+                        <li>Battambang</li>
+                        <li>Phone: +65 11.188.888</li>
+                        <li>Email: hello@colorlib.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                <div class="footer__widget">
+                    <h6>Useful Links</h6>
+                    <ul>
+                        <li><a href="https://suensereypanha-maker.github.io/five_skincare_liva/contact">About Us</a></li>
+                        <li><a href="https://suensereypanha-maker.github.io/five_skincare_liva/shop">About Our Shop</a></li>
+                        <li><a href="#">Secure Shopping</a></li>
+                        <li><a href="#">Delivery infomation</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Our Sitemap</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#">Who We Are</a></li>
+                        <li><a href="#">Our Services</a></li>
+                        <li><a href="#">Projects</a></li>
+                        <li><a href="https://suensereypanha-maker.github.io/five_skincare_liva/contact">Contact</a></li>
+                        <li><a href="#">Innovation</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="footer__widget">
+                    <h6>Join Our Newsletter Now</h6>
+                    <p>Get E-mail updates about our latest shop and special offers.</p>
+                    <form action="#">
+                        <input type="text" placeholder="Enter your mail">
+                        <button type="submit" class="site-btn">Subscribe</button>
+                    </form>
+                    <div class="footer__widget__social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="footer__copyright">
+                    <div class="footer__copyright__text">
+                        <p>
+                            Copyright &copy; 2026 All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        </p>
+                    </div>
+                    <div class="footer__copyright__payment d-flex align-items-center justify-content-end" style="gap: 8px;">
+                        <img src="https://suensereypanha-maker.github.io/five_skincare_liva/img/payments/aba.png" alt="ABA" style="height: 22px;">
+                        <img src="https://suensereypanha-maker.github.io/five_skincare_liva/img/payments/acleda.png" alt="ACLEDA" style="height: 22px;">
+                        <img src="https://suensereypanha-maker.github.io/five_skincare_liva/img/payments/wing.jpg" alt="Wing" style="height: 22px; border-radius: 3px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script src="https://suensereypanha-maker.github.io/five_skincare_liva/js/jquery-3.3.1.min.js"></script>
+    <script src="https://suensereypanha-maker.github.io/five_skincare_liva/js/bootstrap.min.js"></script>
+    <script src="https://suensereypanha-maker.github.io/five_skincare_liva/js/jquery.nice-select.min.js"></script>
+    <script src="https://suensereypanha-maker.github.io/five_skincare_liva/js/jquery-ui.min.js"></script>
+    <script src="https://suensereypanha-maker.github.io/five_skincare_liva/js/jquery.slicknav.js"></script>
+    <script src="https://suensereypanha-maker.github.io/five_skincare_liva/js/mixitup.min.js"></script>
+    <script src="https://suensereypanha-maker.github.io/five_skincare_liva/js/owl.carousel.min.js"></script>
+    <script src="https://suensereypanha-maker.github.io/five_skincare_liva/js/main.js"></script>
+
+        <script id="liva-products-data" type="application/json">
+        {"1":{"id":1,"name":"LIVA Balancing Shampoo","price":32,"image":"http:\/\/127.0.0.1:8008\/img\/shampoo.webp","category_name":"Hair Care","url":"http:\/\/127.0.0.1:8008\/shop\/1"},"2":{"id":2,"name":"LIVA Nourishing Conditioner","price":34,"image":"http:\/\/127.0.0.1:8008\/img\/conditioner.webp","category_name":"Hair Care","url":"http:\/\/127.0.0.1:8008\/shop\/2"},"3":{"id":3,"name":"LIVA Restorative Hair Mask","price":45,"image":"http:\/\/127.0.0.1:8008\/img\/hair-mask.png","category_name":"Hair Care","url":"http:\/\/127.0.0.1:8008\/shop\/3"},"4":{"id":4,"name":"LIVA Refreshing Shower Gel","price":28,"image":"http:\/\/127.0.0.1:8008\/img\/shower-gel.png","category_name":"Body Care","url":"http:\/\/127.0.0.1:8008\/shop\/4"},"5":{"id":5,"name":"LIVA Hydrating Body Lotion","price":36,"image":"http:\/\/127.0.0.1:8008\/img\/body-lotion.webp","category_name":"Body Care","url":"http:\/\/127.0.0.1:8008\/shop\/5"},"6":{"id":6,"name":"LIVA Botanical Daily Edit","price":68,"image":"http:\/\/127.0.0.1:8008\/img\/daily-edit.webp","category_name":"Sets & Bundles","url":"http:\/\/127.0.0.1:8008\/shop\/6"},"7":{"id":7,"name":"LIVA Hair Ritual Duo","price":58,"image":"http:\/\/127.0.0.1:8008\/img\/ritual-duo.webp","category_name":"Sets & Bundles","url":"http:\/\/127.0.0.1:8008\/shop\/7"},"8":{"id":8,"name":"LIVA Travel Essentials Set","price":42,"image":"http:\/\/127.0.0.1:8008\/img\/travel-set.webp","category_name":"Travel Essentials","url":"http:\/\/127.0.0.1:8008\/shop\/8"},"9":{"id":9,"name":"LIVA Botanical Pure Essence","price":48,"image":"http:\/\/127.0.0.1:8008\/img\/botanical.png","category_name":"Facial Care","url":"http:\/\/127.0.0.1:8008\/shop\/9"},"10":{"id":10,"name":"LIVA Radiant Glow Elixir","price":54,"image":"http:\/\/127.0.0.1:8008\/img\/result-1.webp","category_name":"Facial Care","url":"http:\/\/127.0.0.1:8008\/shop\/10"}}
+    </script>
+
+    <div id="cart-toast" role="status" aria-live="polite"
+        style="display:none; position:fixed; top:25px; right:25px; z-index:99999; min-width:280px; max-width:420px; background:#1F2421; color:#fff; border-left:5px solid #7fad39; border-radius:8px; padding:14px 20px; box-shadow:0 8px 24px rgba(0,0,0,.25); font-size:14px;">
+    </div>
+
+    <script>
+        // Global client-side cart manager for static deployments (e.g. GitHub Pages)
+        window.LivaCart = (function () {
+            var STORAGE_KEY = 'liva_botanical_cart';
+
+            function getCatalog() {
+                var el = document.getElementById('liva-products-data');
+                if (!el) return {};
+                try {
+                    return JSON.parse(el.textContent) || {};
+                } catch (e) {
+                    return {};
+                }
+            }
+
+            function getItems() {
+                try {
+                    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+                } catch (e) {
+                    return {};
+                }
+            }
+
+            function saveItems(items) {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+                syncUI();
+            }
+
+            function addItem(productId, quantity) {
+                var catalog = getCatalog();
+                var product = catalog[productId];
+                if (!product) {
+                    for (var k in catalog) {
+                        if (String(catalog[k].id) === String(productId)) {
+                            product = catalog[k];
+                            break;
+                        }
+                    }
+                }
+                if (!product) return null;
+
+                var items = getItems();
+                var q = parseInt(quantity, 10) || 1;
+                var key = String(product.id);
+
+                if (items[key]) {
+                    items[key].quantity += q;
+                } else {
+                    items[key] = {
+                        id: product.id,
+                        name: product.name,
+                        price: Number(product.price),
+                        image: product.image,
+                        category_name: product.category_name,
+                        url: product.url,
+                        quantity: q
+                    };
+                }
+                saveItems(items);
+                return items[key];
+            }
+
+            function updateItem(productId, quantity) {
+                var items = getItems();
+                var key = String(productId);
+                var q = parseInt(quantity, 10);
+                if (q <= 0) {
+                    delete items[key];
+                } else if (items[key]) {
+                    items[key].quantity = q;
+                }
+                saveItems(items);
+            }
+
+            function removeItem(productId) {
+                var items = getItems();
+                var key = String(productId);
+                delete items[key];
+                saveItems(items);
+            }
+
+            function clear() {
+                localStorage.removeItem(STORAGE_KEY);
+                syncUI();
+            }
+
+            function getCount() {
+                var items = getItems();
+                var count = 0;
+                for (var k in items) {
+                    count += (parseInt(items[k].quantity, 10) || 0);
+                }
+                return count;
+            }
+
+            function getSubtotal() {
+                var items = getItems();
+                var total = 0;
+                for (var k in items) {
+                    total += (items[k].price * (parseInt(items[k].quantity, 10) || 0));
+                }
+                return total;
+            }
+
+            function syncUI() {
+                var count = getCount();
+                var subtotal = getSubtotal();
+                document.querySelectorAll('.cart-badge-count, .cart-nav-count').forEach(function (el) {
+                    el.textContent = count;
+                });
+                document.querySelectorAll('.cart-badge-total').forEach(function (el) {
+                    el.textContent = '$' + Number(subtotal).toFixed(2);
+                });
+            }
+
+            return {
+                getItems: getItems,
+                addItem: addItem,
+                updateItem: updateItem,
+                removeItem: removeItem,
+                clear: clear,
+                getCount: getCount,
+                getSubtotal: getSubtotal,
+                syncUI: syncUI
+            };
+        })();
+
+        (function () {
+            function showCartToast(htmlContent, isError) {
+                var toast = document.getElementById('cart-toast');
+                if (!toast) return;
+                toast.innerHTML = htmlContent;
+                toast.style.borderLeftColor = isError ? '#dc3545' : '#7fad39';
+                toast.style.display = 'block';
+                window.clearTimeout(toast._hideTimer);
+                toast._hideTimer = window.setTimeout(function () {
+                    toast.style.display = 'none';
+                }, 4500);
+            }
+
+            function updateCartIndicators(cartCount, cartSubtotal) {
+                document.querySelectorAll('.cart-badge-count, .cart-nav-count').forEach(function (badge) {
+                    badge.textContent = cartCount;
+                });
+                document.querySelectorAll('.cart-badge-total').forEach(function (badge) {
+                    badge.textContent = '$' + Number(cartSubtotal).toFixed(2);
+                });
+            }
+
+            function syncIndicators() {
+                if (window.LivaCart && window.LivaCart.getCount() > 0) {
+                    window.LivaCart.syncUI();
+                }
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', syncIndicators);
+            } else {
+                syncIndicators();
+            }
+            window.addEventListener('pageshow', syncIndicators);
+
+            document.addEventListener('submit', function (event) {
+                var form = event.target;
+                if (!form.classList.contains('js-cart-form')) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                var submitButton = form.querySelector('[type="submit"]');
+                if (submitButton) {
+                    submitButton.disabled = true;
+                }
+
+                var formData = new FormData(form);
+                var productId = formData.get('product_id');
+                var quantity = parseInt(formData.get('quantity'), 10) || 1;
+                var csrfMeta = document.querySelector('meta[name="csrf-token"]');
+                var isStatic = window.location.hostname.indexOf('github.io') !== -1 || window.location.protocol === 'file:';
+                var cartUrl = 'https://suensereypanha-maker.github.io/five_skincare_liva/cart';
+
+                if (isStatic) {
+                    var added = window.LivaCart ? window.LivaCart.addItem(productId, quantity) : null;
+                    var name = added ? added.name : 'Botanical Skincare item';
+                    showCartToast(
+                        '<div><strong>✓ Added to your bag!</strong>' +
+                        '<div style="font-size:12px; opacity:0.85; margin:4px 0 10px;">' + name + ' (Qty: ' + quantity + ')</div>' +
+                        '<a href="' + cartUrl + '" style="display:inline-block; background:#7fad39; color:#fff; padding:6px 14px; border-radius:20px; font-weight:700; font-size:12px; text-decoration:none;">View Bag &amp; Checkout &rarr;</a>' +
+                        '</div>',
+                        false
+                    );
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                    }
+                    return;
+                }
+
+                fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': csrfMeta ? csrfMeta.content : '',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: formData
+                })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('Non-server or static environment: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(function (data) {
+                    if (!data.success) {
+                        throw new Error(data.message || 'Unable to add this item to your bag.');
+                    }
+                    updateCartIndicators(data.cart_count, data.cart_subtotal);
+                    showCartToast(
+                        '<div><strong>✓ ' + data.message + '</strong>' +
+                        '<div style="margin-top:8px;">' +
+                        '<a href="' + cartUrl + '" style="display:inline-block; background:#7fad39; color:#fff; padding:6px 14px; border-radius:20px; font-weight:700; font-size:12px; text-decoration:none;">View Bag &amp; Checkout &rarr;</a>' +
+                        '</div></div>',
+                        false
+                    );
+                })
+                .catch(function () {
+                    var added = window.LivaCart ? window.LivaCart.addItem(productId, quantity) : null;
+                    var name = added ? added.name : 'Botanical Skincare item';
+                    showCartToast(
+                        '<div><strong>✓ Added to your bag!</strong>' +
+                        '<div style="font-size:12px; opacity:0.85; margin:4px 0 10px;">' + name + ' (Qty: ' + quantity + ')</div>' +
+                        '<a href="' + cartUrl + '" style="display:inline-block; background:#7fad39; color:#fff; padding:6px 14px; border-radius:20px; font-weight:700; font-size:12px; text-decoration:none;">View Bag &amp; Checkout &rarr;</a>' +
+                        '</div>',
+                        false
+                    );
+                })
+                .finally(function () {
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                    }
+                });
+            });
+        }());
+    </script>
+
+    </body>
+
+</html>
