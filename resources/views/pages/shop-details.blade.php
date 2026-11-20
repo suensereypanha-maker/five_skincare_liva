@@ -226,17 +226,18 @@
                 </div>
                 <div class="row">
                     @foreach($relatedProducts as $rel)
-                        <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-6 mb-4">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{ asset($rel['image']) }}">
-                                    <ul class="product__item__pic__hover">
+                                <div class="product__item__pic set-bg" data-setbg="{{ asset($rel['image']) }}" style="position: relative; cursor: pointer;">
+                                    <a href="{{ route('shop.show', $rel['id']) }}" class="position-absolute w-100 h-100" style="top: 0; left: 0; z-index: 1;" title="{{ $rel['name'] }}"></a>
+                                    <ul class="product__item__pic__hover" style="z-index: 3;">
                                         <li><a href="{{ route('shop.show', $rel['id']) }}" title="View details"><i class="fa fa-eye"></i></a></li>
                                         <li>
                                             <form action="{{ route('cart.add') }}" method="POST" class="js-cart-form" style="display:inline;">
                                                 @csrf
                                                 <input type="hidden" name="product_id" value="{{ $rel['id'] }}">
                                                 <input type="hidden" name="quantity" value="1">
-                                                <button type="submit" style="background:none; border:none; padding:0; cursor:pointer;" title="Add to bag">
+                                                <button type="submit" title="Add to bag">
                                                     <i class="fa fa-shopping-cart"></i>
                                                 </button>
                                             </form>
@@ -247,6 +248,16 @@
                                     <span style="font-size: 12px; color: #888;">{{ $rel['category_name'] }}</span>
                                     <h6><a href="{{ route('shop.show', $rel['id']) }}">{{ $rel['name'] }}</a></h6>
                                     <h5>${{ number_format($rel['price'], 2) }}</h5>
+                                    <div class="d-block d-md-none mt-2">
+                                        <form action="{{ route('cart.add') }}" method="POST" class="js-cart-form m-0">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $rel['id'] }}">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <button type="submit" class="site-btn py-1 px-2 w-100" style="font-size: 11px; height: 32px; border-radius: 20px; font-weight: 700; letter-spacing: 0.5px;">
+                                                <i class="fa fa-shopping-bag mr-1"></i> <span data-i18n="add_to_cart">Add to Bag</span>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>

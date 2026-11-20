@@ -3670,9 +3670,60 @@ body.lang-km .primary-btn {
 	box-shadow: 0 4px 12px rgba(24, 119, 242, 0.35) !important;
 }
 
+/* Consistent Circular Action Buttons on Desktop Hover */
+.product__item__pic__hover li form,
+.featured__item__pic__hover li form {
+	display: inline-block;
+	margin: 0;
+}
+
+.product__item__pic__hover li button,
+.featured__item__pic__hover li button {
+	font-size: 16px;
+	color: #1c1c1c;
+	height: 40px;
+	width: 40px;
+	line-height: 40px;
+	text-align: center;
+	border: 1px solid #ebebeb;
+	background: #ffffff;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	padding: 0;
+	cursor: pointer;
+	-webkit-transition: all, 0.3s;
+	-moz-transition: all, 0.3s;
+	-ms-transition: all, 0.3s;
+	-o-transition: all, 0.3s;
+	transition: all, 0.3s;
+}
+
+.product__item__pic__hover li:hover button,
+.featured__item__pic__hover li:hover button {
+	background: #7fad39;
+	border-color: #7fad39;
+	color: #ffffff;
+}
+
+.product__item__pic__hover li:hover button i,
+.featured__item__pic__hover li:hover button i {
+	color: #ffffff;
+	transform: rotate(360deg);
+}
+
 /* ==========================================================================
-   Mobile Responsiveness & Touch Experience Enhancements (< 768px and < 576px)
+   Mobile & Tablet Responsiveness (< 992px, < 768px, < 480px)
    ========================================================================== */
+
+@media only screen and (max-width: 991px) {
+	/* Hide floating hover overlay on touchscreens so product photos and faces are never obstructed */
+	.featured__item__pic__hover,
+	.product__item__pic__hover {
+		display: none !important;
+	}
+}
 
 @media only screen and (max-width: 767px) {
 	/* Mobile Hero Banner */
@@ -3701,37 +3752,18 @@ body.lang-km .primary-btn {
 	/* Mobile Product Cards (2-column touch screen layout) */
 	.featured__item,
 	.product__item {
-		margin-bottom: 24px !important;
+		margin-bottom: 20px !important;
 	}
 
 	.featured__item__pic,
-	.product__item__pic,
+	.product__item__pic {
+		height: 185px !important;
+		border-radius: 10px;
+	}
+
 	.product__discount__item__pic {
-		height: 200px !important;
-		border-radius: 8px;
-	}
-
-	/* Always show product actions on mobile touchscreen */
-	.featured__item__pic__hover,
-	.product__item__pic__hover {
-		bottom: 12px !important;
-		opacity: 1 !important;
-		visibility: visible !important;
-	}
-
-	.featured__item__pic__hover li,
-	.product__item__pic__hover li {
-		margin-right: 4px !important;
-	}
-
-	.featured__item__pic__hover li a,
-	.product__item__pic__hover li a,
-	.featured__item__pic__hover li button,
-	.product__item__pic__hover li button {
-		width: 34px !important;
-		height: 34px !important;
-		line-height: 34px !important;
-		font-size: 13px !important;
+		height: 240px !important;
+		border-radius: 12px;
 	}
 
 	.featured__item__text h6,
@@ -3745,16 +3777,136 @@ body.lang-km .primary-btn {
 		font-size: 14px !important;
 	}
 
-	/* Cart & Tables Scroll on Mobile */
+	/* Cart Table to Responsive Mobile Cards */
 	.shoping__cart__table {
-		overflow-x: auto !important;
-		-webkit-overflow-scrolling: touch !important;
+		overflow: visible !important;
 		width: 100% !important;
-		margin-bottom: 20px !important;
+		margin-bottom: 25px !important;
 	}
 
 	.shoping__cart__table table {
-		min-width: 580px !important;
+		width: 100% !important;
+		display: block !important;
+		border: none !important;
+	}
+
+	.shoping__cart__table thead {
+		display: none !important;
+	}
+
+	.shoping__cart__table tbody {
+		display: block !important;
+		width: 100% !important;
+	}
+
+	.shoping__cart__table tbody tr {
+		display: block !important;
+		width: 100% !important;
+		position: relative !important;
+		background: #ffffff !important;
+		border: 1px solid #e8ede0 !important;
+		border-radius: 12px !important;
+		padding: 16px !important;
+		margin-bottom: 16px !important;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04) !important;
+	}
+
+	.shoping__cart__table tbody tr td {
+		display: block !important;
+		width: 100% !important;
+		padding: 4px 0 !important;
+		border: none !important;
+		text-align: left !important;
+	}
+
+	.shoping__cart__table tbody tr td.shoping__cart__item {
+		width: 100% !important;
+		padding-right: 35px !important;
+		margin-bottom: 8px !important;
+	}
+
+	.shoping__cart__table tbody tr td.shoping__cart__item a {
+		display: flex !important;
+		align-items: center !important;
+		gap: 12px !important;
+	}
+
+	.shoping__cart__table tbody tr td.shoping__cart__item img {
+		width: 68px !important;
+		height: 68px !important;
+		border-radius: 8px !important;
+		object-fit: cover !important;
+		margin: 0 !important;
+		flex-shrink: 0 !important;
+	}
+
+	.shoping__cart__table tbody tr td.shoping__cart__item h5 {
+		font-size: 15px !important;
+		line-height: 1.35 !important;
+		margin: 0 !important;
+	}
+
+	.shoping__cart__table tbody tr td.shoping__cart__price {
+		font-size: 14px !important;
+		color: #7fad39 !important;
+		font-weight: 700 !important;
+	}
+
+	.shoping__cart__table tbody tr td.shoping__cart__price:before {
+		content: "Price: ";
+		font-weight: 500;
+		color: #888;
+		font-size: 13px;
+	}
+
+	.shoping__cart__table tbody tr td.shoping__cart__quantity {
+		padding-top: 8px !important;
+		padding-bottom: 8px !important;
+	}
+
+	.shoping__cart__table tbody tr td.shoping__cart__quantity:before {
+		content: "Qty: ";
+		font-weight: 500;
+		color: #888;
+		font-size: 13px;
+		margin-right: 6px;
+	}
+
+	.shoping__cart__table tbody tr td.shoping__cart__quantity .quantity {
+		display: inline-flex !important;
+		align-items: center !important;
+	}
+
+	.shoping__cart__table tbody tr td.shoping__cart__total {
+		font-size: 15px !important;
+		color: #1F2421 !important;
+		font-weight: 700 !important;
+		border-top: 1px dashed #e8ede0 !important;
+		padding-top: 8px !important;
+		margin-top: 6px !important;
+	}
+
+	.shoping__cart__table tbody tr td.shoping__cart__total:before {
+		content: "Subtotal: ";
+		font-weight: 600;
+		color: #555;
+		font-size: 13px;
+	}
+
+	.shoping__cart__table tbody tr td.shoping__cart__item__close {
+		position: absolute !important;
+		top: 14px !important;
+		right: 14px !important;
+		width: auto !important;
+		padding: 0 !important;
+	}
+
+	.shoping__cart__table tbody tr td.shoping__cart__item__close a,
+	.shoping__cart__table tbody tr td.shoping__cart__item__close span {
+		font-size: 20px !important;
+		color: #dc3545 !important;
+		cursor: pointer !important;
+		line-height: 1 !important;
 	}
 
 	/* Floating Controls on Mobile */
@@ -3798,13 +3950,17 @@ body.lang-km .primary-btn {
 	}
 
 	.featured__item__pic,
-	.product__item__pic,
+	.product__item__pic {
+		height: 165px !important;
+	}
+
 	.product__discount__item__pic {
-		height: 175px !important;
+		height: 210px !important;
 	}
 
 	.hero__brand-logo span:first-child {
 		font-size: 22px !important;
 	}
 }
+
 

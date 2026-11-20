@@ -92,7 +92,7 @@
                                             @csrf
                                             <input type="hidden" name="product_id" value="{{ $prod['id'] }}">
                                             <input type="hidden" name="quantity" value="1">
-                                            <button type="submit" style="background:none; border:none; padding:0; cursor:pointer;" title="Add to bag">
+                                            <button type="submit" title="Add to bag">
                                                 <i class="fa fa-shopping-cart"></i>
                                             </button>
                                         </form>
@@ -104,20 +104,17 @@
                                 <h6 style="margin-top: 4px; margin-bottom: 6px;">
                                     <a href="{{ route('shop.show', $prod['id']) }}" style="color: #1c1c1c; font-weight: 700;">{{ $prod['name'] }}</a>
                                 </h6>
-                                <h5 style="margin-bottom: 10px;">${{ number_format($prod['price'], 2) }}</h5>
-                                {{-- <div class="d-flex align-items-center justify-content-center" style="gap: 8px;">
-                                    <a href="{{ route('shop.show', $prod['id']) }}" class="btn btn-sm" style="border: 1px solid #7fad39; color: #7fad39; font-weight: 700; font-size: 12px; padding: 4px 14px; border-radius: 20px; text-decoration: none;">
-                                        See Details <i class="fa fa-arrow-right ml-1"></i>
-                                    </a>
-                                    <form action="{{ route('cart.add') }}" method="POST" class="js-cart-form" style="display:inline;">
+                                <h5 style="margin-bottom: 6px;">${{ number_format($prod['price'], 2) }}</h5>
+                                <div class="d-block d-md-none mt-2">
+                                    <form action="{{ route('cart.add') }}" method="POST" class="js-cart-form m-0">
                                         @csrf
                                         <input type="hidden" name="product_id" value="{{ $prod['id'] }}">
                                         <input type="hidden" name="quantity" value="1">
-                                        <button type="submit" class="btn btn-sm" style="background: #7fad39; color: #fff; font-weight: 700; font-size: 12px; padding: 4px 12px; border-radius: 20px; border: none; cursor: pointer;" title="Add to bag">
-                                            <i class="fa fa-shopping-bag"></i>
+                                        <button type="submit" class="site-btn py-1 px-2 w-100" style="font-size: 11px; height: 32px; border-radius: 20px; font-weight: 700; letter-spacing: 0.5px;">
+                                            <i class="fa fa-shopping-bag mr-1"></i> <span data-i18n="add_to_cart">Add to Bag</span>
                                         </button>
                                     </form>
-                                </div> --}}
+                                </div>
                             </div>
                         </div>
                     </div>
