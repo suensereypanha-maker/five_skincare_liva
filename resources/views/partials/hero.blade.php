@@ -25,21 +25,21 @@
             </div>
             <nav class="hero__brand-nav d-none d-md-flex align-items-center" style="gap: 28px;">
                 <a href="{{ route('home') }}" class="d-flex align-items-center" style="font-size: 14px; font-weight: {{ request()->routeIs('home') ? '700' : '600' }}; color: {{ request()->routeIs('home') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px;">
-                    <i class="fa fa-home mr-1"></i> HOME
+                    <i class="fa fa-home mr-1"></i> <span data-i18n="home">HOME</span>
                 </a>
-                <a href="{{ route('shop.index') }}" style="font-size: 14px; font-weight: {{ request()->routeIs('shop.*') ? '700' : '600' }}; color: {{ request()->routeIs('shop.*') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px;">
+                <a href="{{ route('shop.index') }}" style="font-size: 14px; font-weight: {{ request()->routeIs('shop.*') ? '700' : '600' }}; color: {{ request()->routeIs('shop.*') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px;" data-i18n="shop">
                     SHOP
                 </a>
                 <a href="{{ route('cart.index') }}" style="font-size: 14px; font-weight: {{ request()->routeIs('cart.*') ? '700' : '600' }}; color: {{ request()->routeIs('cart.*') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px;">
-                    BAG (<span class="cart-nav-count">{{ $globalCartCount ?? \App\Services\CartService::getCount() }}</span>)
+                    <span data-i18n="shopping_bag">BAG</span> (<span class="cart-nav-count">{{ $globalCartCount ?? \App\Services\CartService::getCount() }}</span>)
                 </a>
-                <a href="{{ route('checkout.index') }}" style="font-size: 14px; font-weight: {{ request()->routeIs('checkout.*') ? '700' : '600' }}; color: {{ request()->routeIs('checkout.*') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px;">
+                <a href="{{ route('checkout.index') }}" style="font-size: 14px; font-weight: {{ request()->routeIs('checkout.*') ? '700' : '600' }}; color: {{ request()->routeIs('checkout.*') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px;" data-i18n="checkout">
                     CHECKOUT
                 </a>
-                <a href="{{ route('blog.index') }}" style="font-size: 14px; font-weight: {{ request()->routeIs('blog.*') ? '700' : '600' }}; color: {{ request()->routeIs('blog.*') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px;">
+                <a href="{{ route('blog.index') }}" style="font-size: 14px; font-weight: {{ request()->routeIs('blog.*') ? '700' : '600' }}; color: {{ request()->routeIs('blog.*') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px;" data-i18n="skincare_journal">
                     JOURNAL
                 </a>
-                <a href="{{ route('contact.index') }}" style="font-size: 14px; font-weight: {{ request()->routeIs('contact.*') ? '700' : '600' }}; color: {{ request()->routeIs('contact.*') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px;">
+                <a href="{{ route('contact.index') }}" style="font-size: 14px; font-weight: {{ request()->routeIs('contact.*') ? '700' : '600' }}; color: {{ request()->routeIs('contact.*') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px;" data-i18n="contact">
                     CONTACT
                 </a>
             </nav>
@@ -69,11 +69,11 @@
                     <div class="hero__search__form-modern" style="flex: 1 1 320px; max-width: 480px;">
                         <form action="{{ route('shop.index') }}" method="GET" style="display: flex; align-items: center; background: #ffffff; border: 2px solid #7fad39; border-radius: 30px; height: 48px; overflow: hidden; padding-left: 16px; box-shadow: 0 2px 8px rgba(127,173,57,0.12); margin: 0;">
                             <i class="fa fa-search" style="color: #7fad39; font-size: 15px; margin-right: 10px;"></i>
-                            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search botanical skincare, hair care, oils..." style="flex: 1; border: none; outline: none; background: transparent; font-size: 14px; color: #1c1c1c; padding: 0 6px; height: 100%;">
+                            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search botanical skincare, hair care, oils..." data-i18n-placeholder="search_placeholder" style="flex: 1; border: none; outline: none; background: transparent; font-size: 14px; color: #1c1c1c; padding: 0 6px; height: 100%;">
                             @if(request('category'))
                                 <input type="hidden" name="category" value="{{ request('category') }}">
                             @endif
-                            <button type="submit" style="background: #7fad39; color: #ffffff; border: none; height: 100%; padding: 0 24px; font-weight: 700; font-size: 13px; letter-spacing: 1px; cursor: pointer; transition: background 0.3s; display: flex; align-items: center; justify-content: center;">
+                            <button type="submit" style="background: #7fad39; color: #ffffff; border: none; height: 100%; padding: 0 24px; font-weight: 700; font-size: 13px; letter-spacing: 1px; cursor: pointer; transition: background 0.3s; display: flex; align-items: center; justify-content: center;" data-i18n="search_btn">
                                 SEARCH
                             </button>
                         </form>
@@ -86,7 +86,7 @@
                         </div>
                         <div class="hero__search__phone__text">
                             <h5 style="font-size: 14px; margin-bottom: 2px;">+65 11.188.888</h5>
-                            <span style="font-size: 12px;">support 24/7 time</span>
+                            <span style="font-size: 12px;" data-i18n="support_time">support 24/7 time</span>
                         </div>
                     </div>
 
@@ -116,7 +116,7 @@
                                     <form action="{{ route('logout') }}" method="POST" class="m-0">
                                         @csrf
                                         <button type="submit" class="dropdown-item py-2 text-danger" style="cursor: pointer;">
-                                            <i class="fa fa-sign-out mr-2"></i> Logout
+                                            <i class="fa fa-sign-out mr-2"></i> <span data-i18n="logout">Logout</span>
                                         </button>
                                     </form>
                                 </div>
@@ -124,9 +124,9 @@
                         @else
                             <div class="d-flex align-items-center" style="gap: 8px;">
                                 <a href="{{ route('login') }}" class="btn" style="border: 1px solid #7fad39; color: #7fad39; font-weight: 700; font-size: 13px; padding: 8px 16px; border-radius: 25px; text-decoration: none; line-height: 1.2;">
-                                    <i class="fa fa-user mr-1"></i> Login
+                                    <i class="fa fa-user mr-1"></i> <span data-i18n="login">Login</span>
                                 </a>
-                                <a href="{{ route('register') }}" class="btn" style="background: #7fad39; color: #ffffff; font-weight: 700; font-size: 13px; padding: 8px 16px; border-radius: 25px; text-decoration: none; line-height: 1.2; box-shadow: 0 2px 6px rgba(127,173,57,0.3);">
+                                <a href="{{ route('register') }}" class="btn" style="background: #7fad39; color: #ffffff; font-weight: 700; font-size: 13px; padding: 8px 16px; border-radius: 25px; text-decoration: none; line-height: 1.2; box-shadow: 0 2px 6px rgba(127,173,57,0.3);" data-i18n="register">
                                     Register
                                 </a>
                             </div>
@@ -140,10 +140,10 @@
                             <source src="{{ asset('video/hero.mp4') }}" type="video/mp4">
                         </video>
                         <div class="hero__text">
-                            <span>BOTANICAL SKINCARE</span>
-                            <h2>Natural &amp; <br />Organic Beauty</h2>
-                            <p>Free Pickup and Delivery Available</p>
-                            <a href="{{ route('shop.index') }}" class="primary-btn">SHOP NOW</a>
+                            <span data-i18n="organic_badge">BOTANICAL SKINCARE</span>
+                            <h2 data-i18n="hero_title">Natural &amp; <br />Organic Beauty</h2>
+                            <p data-i18n="hero_subtitle">Free Pickup and Delivery Available</p>
+                            <a href="{{ route('shop.index') }}" class="primary-btn" data-i18n="shop_now">SHOP NOW</a>
                         </div>
                     </div>
                 @endif

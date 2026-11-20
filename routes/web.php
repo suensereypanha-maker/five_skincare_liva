@@ -42,6 +42,13 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Social Authentication (Google & Facebook)
+Route::get('/auth/{provider}/redirect', [AuthController::class, 'redirectToProvider'])->name('social.login');
+Route::get('/auth/{provider}/callback', [AuthController::class, 'handleProviderCallback'])->name('social.callback');
+
+// Language Switch
+Route::get('/lang/{locale}', [AuthController::class, 'switchLanguage'])->name('lang.switch');
+
 // Blog
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog-details', [BlogController::class, 'show'])->name('blog.details');

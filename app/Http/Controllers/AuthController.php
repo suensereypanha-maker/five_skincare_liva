@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class AuthController extends Controller
@@ -91,5 +92,49 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('home')->with('info', 'You have been logged out.');
+    }
+
+    /**
+     * Redirect to social provider or authenticate demo social account.
+     */
+    public function redirectToProvider(string $provider): RedirectResponse
+    {
+        if (! in_array($provider, ['google', 'facebook'])) {
+            return redirect()->route('login')->withErrors(['email' => 'Unsupported social login provider.']);
+        }
+
+        $providerName = ucfirst($provider);
+        $user = User::firstOrCreate(
+            ['email' => "demo.{$provider}@livaskincare.com"],
+            [
+                'name' => "{$providerName} Customer",
+                'password' => Hash::make(Str::random(24)),
+            ]
+        );
+
+        Auth::login($user);
+        request()->session()->regenerate();
+
+        return redirect()->route('home')->with('success', "Signed in successfully with {$providerName}!");
+    }
+
+    /**
+     * Handle social provider callback.
+     */
+    public function handleProviderCallback(string $provider): RedirectResponse
+    {
+        return $this->redirectToProvider($provider);
+    }
+
+    /**
+     * Switch application language in session.
+     */
+    public function switchLanguage(string $locale): RedirectResponse
+    {
+        if (in_array($locale, ['en', 'km'])) {
+            session(['locale' => $locale]);
+        }
+
+        return back();
     }
 }

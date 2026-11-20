@@ -12,7 +12,7 @@
     <title>@yield('title', 'LIVA | Botanical Skincare')</title>
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&amp;family=Kantumruy+Pro:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" type="text/css">
@@ -101,6 +101,8 @@
     <script src="{{ asset('js/mixitup.min.js') }}"></script>
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/liva-i18n.js') }}"></script>
+    <script src="{{ asset('js/liva-social-auth.js') }}"></script>
 
     @php
         $clientCatalog = [];

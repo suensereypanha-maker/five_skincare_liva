@@ -6,7 +6,7 @@
                     <div class="header__top__left">
                         <ul>
                             <li><i class="fa fa-envelope"></i> care@livaskincare.com</li>
-                            <li>Free Botanical Shipping for all Orders over $50</li>
+                            <li data-i18n="free_shipping">Free Botanical Shipping for all Orders over $50</li>
                         </ul>
                     </div>
                 </div>
@@ -19,11 +19,11 @@
                             <a href="#"><i class="fa fa-instagram"></i></a>
                         </div>
                         <div class="header__top__right__language">
-                            <div>English</div>
+                            <div class="js-current-lang-label">🇬🇧 English</div>
                             <span class="arrow_carrot-down"></span>
-                            <ul>
-                                <li><a href="#">English</a></li>
-                                <li><a href="#">Khmer</a></li>
+                            <ul style="width: 140px; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 9999;">
+                                <li><a href="javascript:void(0)" onclick="setAppLanguage('en')">🇬🇧 English</a></li>
+                                <li><a href="javascript:void(0)" onclick="setAppLanguage('km')">🇰🇭 ភាសាខ្មែរ</a></li>
                             </ul>
                         </div>
                         <div class="header__top__right__auth d-flex align-items-center">
@@ -36,17 +36,17 @@
                                         <form action="{{ route('logout') }}" method="POST" class="m-0">
                                             @csrf
                                             <button type="submit" class="dropdown-item" style="cursor: pointer; color: #dc3545; padding: 8px 16px;">
-                                                <i class="fa fa-sign-out mr-1"></i> Logout
+                                                <i class="fa fa-sign-out mr-1"></i> <span data-i18n="logout">Logout</span>
                                             </button>
                                         </form>
                                     </div>
                                 </div>
                             @else
                                 <a href="{{ route('login') }}" style="display: inline-block; font-size: 14px; font-weight: 600; color: #1c1c1c; text-decoration: none;">
-                                    <i class="fa fa-user mr-1"></i> Login
+                                    <i class="fa fa-user mr-1"></i> <span data-i18n="login">Login</span>
                                 </a>
                                 <span style="margin: 0 8px; color: #bbb; font-weight: 400;">/</span>
-                                <a href="{{ route('register') }}" style="display: inline-block; font-size: 14px; font-weight: 600; color: #7fad39; text-decoration: none;">
+                                <a href="{{ route('register') }}" style="display: inline-block; font-size: 14px; font-weight: 600; color: #7fad39; text-decoration: none;" data-i18n="register">
                                     Register
                                 </a>
                             @endauth
@@ -69,18 +69,18 @@
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li class="{{ request()->routeIs('home') ? 'active' : '' }}"><a href="{{ route('home') }}">Home</a></li>
-                        <li class="{{ request()->routeIs('shop.index', 'shop.show', 'shop.details') ? 'active' : '' }}"><a href="{{ route('shop.index') }}">Shop</a></li>
-                        <li class="{{ request()->routeIs('cart.index', 'checkout.index', 'checkout.success') ? 'active' : '' }}"><a href="#">Pages</a>
+                        <li class="{{ request()->routeIs('home') ? 'active' : '' }}"><a href="{{ route('home') }}" data-i18n="home">Home</a></li>
+                        <li class="{{ request()->routeIs('shop.index', 'shop.show', 'shop.details') ? 'active' : '' }}"><a href="{{ route('shop.index') }}" data-i18n="shop">Shop</a></li>
+                        <li class="{{ request()->routeIs('cart.index', 'checkout.index', 'checkout.success') ? 'active' : '' }}"><a href="#" data-i18n="pages">Pages</a>
                             <ul class="header__menu__dropdown">
-                                <li><a href="{{ route('shop.index') }}">Botanical Shop</a></li>
-                                <li><a href="{{ route('cart.index') }}">Shopping Bag</a></li>
-                                <li><a href="{{ route('checkout.index') }}">Check Out</a></li>
-                                <li><a href="{{ route('blog.index') }}">Skincare Journal</a></li>
+                                <li><a href="{{ route('shop.index') }}" data-i18n="botanical_shop">Botanical Shop</a></li>
+                                <li><a href="{{ route('cart.index') }}" data-i18n="shopping_bag">Shopping Bag</a></li>
+                                <li><a href="{{ route('checkout.index') }}" data-i18n="checkout">Check Out</a></li>
+                                <li><a href="{{ route('blog.index') }}" data-i18n="skincare_journal">Skincare Journal</a></li>
                             </ul>
                         </li>
-                        <li class="{{ request()->routeIs('blog.index', 'blog.details', 'blog.show') ? 'active' : '' }}"><a href="{{ route('blog.index') }}">Blog</a></li>
-                        <li class="{{ request()->routeIs('contact.index') ? 'active' : '' }}"><a href="{{ route('contact.index') }}">Contact</a></li>
+                        <li class="{{ request()->routeIs('blog.index', 'blog.details', 'blog.show') ? 'active' : '' }}"><a href="{{ route('blog.index') }}" data-i18n="blog">Blog</a></li>
+                        <li class="{{ request()->routeIs('contact.index') ? 'active' : '' }}"><a href="{{ route('contact.index') }}" data-i18n="contact">Contact</a></li>
                     </ul>
                 </nav>
             </div>
@@ -96,7 +96,7 @@
                         </li>
                     </ul>
                     <div class="header__cart__price">
-                        bag: <span class="cart-badge-total">${{ number_format($globalCartSubtotal ?? \App\Services\CartService::getSubtotal(), 2) }}</span>
+                        <span data-i18n="bag_label">bag:</span> <span class="cart-badge-total">${{ number_format($globalCartSubtotal ?? \App\Services\CartService::getSubtotal(), 2) }}</span>
                     </div>
                 </div>
             </div>

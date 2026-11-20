@@ -58,15 +58,15 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2>Featured Botanicals</h2>
+                        <h2 data-i18n="featured_title">Featured Botanicals</h2>
                     </div>
                     <div class="featured__controls">
                         <ul>
-                            <li class="active" data-filter="*">All</li>
-                            <li data-filter=".haircare">Hair Care</li>
-                            <li data-filter=".bodycare">Body Care</li>
-                            <li data-filter=".facialcare">Facial Care</li>
-                            <li data-filter=".sets">Sets &amp; Bundles</li>
+                            <li class="active" data-filter="*" data-i18n="filter_all">All</li>
+                            <li data-filter=".haircare" data-i18n="filter_hair">Hair Care</li>
+                            <li data-filter=".bodycare" data-i18n="filter_body">Body Care</li>
+                            <li data-filter=".facialcare" data-i18n="filter_facial">Facial Care</li>
+                            <li data-filter=".sets" data-i18n="filter_sets">Sets &amp; Bundles</li>
                         </ul>
                     </div>
                 </div>
