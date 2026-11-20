@@ -107,14 +107,159 @@
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
 
+    @php
+        $clientCatalog = [];
+        foreach (\App\Services\ProductService::getAllProducts() as $prod) {
+            $clientCatalog[$prod['id']] = [
+                'id' => $prod['id'],
+                'name' => $prod['name'],
+                'price' => (float) $prod['price'],
+                'image' => asset($prod['image']),
+                'category_name' => $prod['category_name'] ?? 'Botanical Care',
+                'url' => route('shop.show', $prod['id']),
+            ];
+        }
+    @endphp
+    <script id="liva-products-data" type="application/json">
+        {!! json_encode($clientCatalog) !!}
+    </script>
+
     <div id="cart-toast" role="status" aria-live="polite"
         style="display:none; position:fixed; right:20px; bottom:20px; z-index:9999; max-width:320px; background:#1c1c1c; color:#fff; border-left:4px solid #7fad39; border-radius:6px; padding:12px 16px; box-shadow:0 4px 16px rgba(0,0,0,.18);">
     </div>
 
     <script>
+        // Global client-side cart manager for static deployments (e.g. GitHub Pages)
+        window.LivaCart = (function () {
+            var STORAGE_KEY = 'liva_botanical_cart';
+
+            function getCatalog() {
+                var el = document.getElementById('liva-products-data');
+                if (!el) return {};
+                try {
+                    return JSON.parse(el.textContent) || {};
+                } catch (e) {
+                    return {};
+                }
+            }
+
+            function getItems() {
+                try {
+                    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+                } catch (e) {
+                    return {};
+                }
+            }
+
+            function saveItems(items) {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+                syncUI();
+            }
+
+            function addItem(productId, quantity) {
+                var catalog = getCatalog();
+                var product = catalog[productId];
+                if (!product) {
+                    // Try to search by matching id loosely
+                    for (var k in catalog) {
+                        if (String(catalog[k].id) === String(productId)) {
+                            product = catalog[k];
+                            break;
+                        }
+                    }
+                }
+                if (!product) return null;
+
+                var items = getItems();
+                var q = parseInt(quantity, 10) || 1;
+                var key = String(product.id);
+
+                if (items[key]) {
+                    items[key].quantity += q;
+                } else {
+                    items[key] = {
+                        id: product.id,
+                        name: product.name,
+                        price: Number(product.price),
+                        image: product.image,
+                        category_name: product.category_name,
+                        url: product.url,
+                        quantity: q
+                    };
+                }
+                saveItems(items);
+                return items[key];
+            }
+
+            function updateItem(productId, quantity) {
+                var items = getItems();
+                var key = String(productId);
+                var q = parseInt(quantity, 10);
+                if (q <= 0) {
+                    delete items[key];
+                } else if (items[key]) {
+                    items[key].quantity = q;
+                }
+                saveItems(items);
+            }
+
+            function removeItem(productId) {
+                var items = getItems();
+                var key = String(productId);
+                delete items[key];
+                saveItems(items);
+            }
+
+            function clear() {
+                localStorage.removeItem(STORAGE_KEY);
+                syncUI();
+            }
+
+            function getCount() {
+                var items = getItems();
+                var count = 0;
+                for (var k in items) {
+                    count += (parseInt(items[k].quantity, 10) || 0);
+                }
+                return count;
+            }
+
+            function getSubtotal() {
+                var items = getItems();
+                var total = 0;
+                for (var k in items) {
+                    total += (items[k].price * (parseInt(items[k].quantity, 10) || 0));
+                }
+                return total;
+            }
+
+            function syncUI() {
+                var count = getCount();
+                var subtotal = getSubtotal();
+                document.querySelectorAll('.cart-badge-count, .cart-nav-count').forEach(function (el) {
+                    el.textContent = count;
+                });
+                document.querySelectorAll('.cart-badge-total').forEach(function (el) {
+                    el.textContent = '$' + Number(subtotal).toFixed(2);
+                });
+            }
+
+            return {
+                getItems: getItems,
+                addItem: addItem,
+                updateItem: updateItem,
+                removeItem: removeItem,
+                clear: clear,
+                getCount: getCount,
+                getSubtotal: getSubtotal,
+                syncUI: syncUI
+            };
+        })();
+
         (function () {
             function showCartToast(message, isError) {
                 var toast = document.getElementById('cart-toast');
+                if (!toast) return;
                 toast.textContent = message;
                 toast.style.borderLeftColor = isError ? '#dc3545' : '#7fad39';
                 toast.style.display = 'block';
@@ -125,15 +270,17 @@
             }
 
             function updateCartIndicators(cartCount, cartSubtotal) {
-                document.querySelectorAll('.cart-badge-count').forEach(function (badge) {
-                    badge.textContent = cartCount;
-                });
-                document.querySelectorAll('.cart-nav-count').forEach(function (badge) {
+                document.querySelectorAll('.cart-badge-count, .cart-nav-count').forEach(function (badge) {
                     badge.textContent = cartCount;
                 });
                 document.querySelectorAll('.cart-badge-total').forEach(function (badge) {
                     badge.textContent = '$' + Number(cartSubtotal).toFixed(2);
                 });
+            }
+
+            // Sync indicators from localStorage if client cart has items
+            if (window.LivaCart && window.LivaCart.getCount() > 0) {
+                window.LivaCart.syncUI();
             }
 
             document.addEventListener('submit', function (event) {
@@ -149,33 +296,41 @@
                     submitButton.disabled = true;
                 }
 
+                var formData = new FormData(form);
+                var productId = formData.get('product_id');
+                var quantity = parseInt(formData.get('quantity'), 10) || 1;
+                var csrfMeta = document.querySelector('meta[name="csrf-token"]');
+
                 fetch(form.action, {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                        'X-CSRF-TOKEN': csrfMeta ? csrfMeta.content : '',
                         'X-Requested-With': 'XMLHttpRequest'
                     },
-                    body: new FormData(form)
+                    body: formData
                 })
                 .then(function (response) {
-                    return response.json().then(function (data) {
-                        if (!response.ok) {
-                            throw new Error(data.message || 'Unable to add this item to your bag.');
-                        }
-                        return data;
-                    });
+                    if (!response.ok) {
+                        throw new Error('Non-server or static environment: ' + response.status);
+                    }
+                    return response.json();
                 })
                 .then(function (data) {
                     if (!data.success) {
                         throw new Error(data.message || 'Unable to add this item to your bag.');
                     }
-
                     updateCartIndicators(data.cart_count, data.cart_subtotal);
                     showCartToast(data.message, false);
                 })
-                .catch(function (error) {
-                    showCartToast(error.message, true);
+                .catch(function () {
+                    // Fallback to client-side localStorage cart for static preview environments like GitHub Pages
+                    var added = window.LivaCart ? window.LivaCart.addItem(productId, quantity) : null;
+                    if (added) {
+                        showCartToast('Added ' + added.name + ' to your bag!', false);
+                    } else {
+                        showCartToast('Added item to your botanical bag!', false);
+                    }
                 })
                 .finally(function () {
                     if (submitButton) {

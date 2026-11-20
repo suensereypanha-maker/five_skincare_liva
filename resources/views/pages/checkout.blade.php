@@ -38,21 +38,20 @@
     <!-- Checkout Section Begin -->
     <section class="checkout spad">
         <div class="container">
-            @if(empty($cart) || count($cart) === 0)
-                <div class="row">
-                    <div class="col-lg-12 text-center py-5" style="background: #fafafa; border-radius: 8px;">
-                        <div style="font-size: 54px; color: #7fad39; margin-bottom: 20px;">
-                            <i class="fa fa-shopping-bag"></i>
-                        </div>
-                        <h3>Your Botanical Bag is Empty</h3>
-                        <p class="text-muted mt-2 mb-4">Please add your favorite botanical skincare items before proceeding to checkout.</p>
-                        <a href="{{ route('shop.index') }}" class="primary-btn">EXPLORE BOTANICAL COLLECTION</a>
+            <div class="row" id="checkout-empty-state" style="{{ (empty($cart) || count($cart) === 0) ? '' : 'display: none;' }}">
+                <div class="col-lg-12 text-center py-5" style="background: #fafafa; border-radius: 8px;">
+                    <div style="font-size: 54px; color: #7fad39; margin-bottom: 20px;">
+                        <i class="fa fa-shopping-bag"></i>
                     </div>
+                    <h3>Your Botanical Bag is Empty</h3>
+                    <p class="text-muted mt-2 mb-4">Please add your favorite botanical skincare items before proceeding to checkout.</p>
+                    <a href="{{ route('shop.index') }}" class="primary-btn">EXPLORE BOTANICAL COLLECTION</a>
                 </div>
-            @else
-                <div class="checkout__form">
+            </div>
+
+            <div class="checkout__form" id="checkout-form-state" style="{{ (empty($cart) || count($cart) === 0) ? 'display: none;' : '' }}">
                 <h4>Botanical Order &amp; Delivery Details</h4>
-                <form action="{{ route('checkout.process') }}" method="POST">
+                <form action="{{ route('checkout.process') }}" method="POST" id="checkout-submit-form">
                     @csrf
                     <div class="row">
                         <div class="col-lg-7 col-md-6">
@@ -97,7 +96,7 @@
                             <div class="checkout__order" style="background: #fdfdfc; border: 1px solid #e1e7db; border-radius: 8px;">
                                 <h4>Your Botanical Order</h4>
                                 <div class="checkout__order__products">Botanical Item <span>Total</span></div>
-                                <ul style="border-bottom: 1px solid #ebebeb; padding-bottom: 15px; margin-bottom: 15px;">
+                                <ul id="checkout-order-items" style="border-bottom: 1px solid #ebebeb; padding-bottom: 15px; margin-bottom: 15px;">
                                     @foreach($cart as $item)
                                         <li class="d-flex justify-content-between align-items-center mb-2" style="font-size: 14px;">
                                             <span>
@@ -111,13 +110,13 @@
                                     @endforeach
                                 </ul>
                                 <div class="checkout__order__subtotal">
-                                    Subtotal <span>${{ number_format($subtotal, 2) }}</span>
+                                    Subtotal <span id="checkout-subtotal">${{ number_format($subtotal, 2) }}</span>
                                 </div>
                                 <div class="checkout__order__subtotal" style="font-size: 14px; font-weight: normal; color: #666; border-top: none;">
-                                    Shipping <span>{{ $shipping > 0 ? '$'.number_format($shipping, 2) : 'FREE' }}</span>
+                                    Shipping <span id="checkout-shipping">{{ $shipping > 0 ? '$'.number_format($shipping, 2) : 'FREE' }}</span>
                                 </div>
                                 <div class="checkout__order__total">
-                                    Total <span>${{ number_format($total, 2) }}</span>
+                                    Total <span id="checkout-total">${{ number_format($total, 2) }}</span>
                                 </div>
 
                                 <div class="mt-4 mb-3">
@@ -218,7 +217,6 @@
                     </div>
                 </form>
             </div>
-            @endif
         </div>
     </section>
     <!-- Checkout Section End -->
@@ -235,6 +233,60 @@
                     });
                 });
             });
+
+            // Populate checkout items and order totals from client-side cart (for static hosts like GitHub Pages)
+            if (window.LivaCart) {
+                var emptyState = document.getElementById('checkout-empty-state');
+                var formState = document.getElementById('checkout-form-state');
+                var itemsList = document.getElementById('checkout-order-items');
+                var subtotalEl = document.getElementById('checkout-subtotal');
+                var shippingEl = document.getElementById('checkout-shipping');
+                var totalEl = document.getElementById('checkout-total');
+                var clientCount = window.LivaCart.getCount();
+
+                if (clientCount > 0) {
+                    if (emptyState) emptyState.style.display = 'none';
+                    if (formState) formState.style.display = 'block';
+
+                    if (itemsList) {
+                        itemsList.innerHTML = '';
+                        var items = window.LivaCart.getItems();
+                        for (var k in items) {
+                            var item = items[k];
+                            var li = document.createElement('li');
+                            li.className = 'd-flex justify-content-between align-items-center mb-2';
+                            li.style.fontSize = '14px';
+                            li.innerHTML =
+                                '<span>' + item.name + ' <strong style="color: #7fad39;">&times; ' + item.quantity + '</strong></span>' +
+                                '<span style="font-weight: 600;">$' + (item.price * item.quantity).toFixed(2) + '</span>';
+                            itemsList.appendChild(li);
+                        }
+                    }
+
+                    var subtotal = window.LivaCart.getSubtotal();
+                    var shipping = (subtotal >= 50 || subtotal === 0) ? 0 : 5.00;
+                    var total = subtotal + shipping;
+
+                    if (subtotalEl) subtotalEl.textContent = '$' + subtotal.toFixed(2);
+                    if (shippingEl) shippingEl.textContent = shipping > 0 ? '$' + shipping.toFixed(2) : 'FREE';
+                    if (totalEl) totalEl.textContent = '$' + total.toFixed(2);
+                }
+            }
+
+            var checkoutForm = document.getElementById('checkout-submit-form');
+            if (checkoutForm) {
+                checkoutForm.addEventListener('submit', function (e) {
+                    // Check if running on GitHub Pages (static environment)
+                    if (window.location.hostname.indexOf('github.io') !== -1) {
+                        e.preventDefault();
+                        alert('Order simulated successfully!\n\nNote: This is a static GitHub Pages preview demo. In a live production environment with PHP and database, your order is recorded and QR payment is verified in real-time.');
+                        if (window.LivaCart) {
+                            window.LivaCart.clear();
+                        }
+                        window.location.href = '{{ route("shop.index") }}';
+                    }
+                });
+            }
         </script>
     @endpush
 @endsection
