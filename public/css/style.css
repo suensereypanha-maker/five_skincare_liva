@@ -3717,11 +3717,72 @@ body.lang-km .primary-btn {
    Mobile & Tablet Responsiveness (< 992px, < 768px, < 480px)
    ========================================================================== */
 
-@media only screen and (max-width: 991px) {
-	/* Hide floating hover overlay on touchscreens so product photos and faces are never obstructed */
+/* Slide-Out Mobile Filter Drawer */
+.liva-filter-overlay {
+	display: none;
+}
+
+@media only screen and (max-width: 991px), (hover: none) {
+	/* Completely eliminate floating hover overlays on mobile/touchscreens so product photos and faces are never obscured */
 	.featured__item__pic__hover,
-	.product__item__pic__hover {
+	.product__item__pic__hover,
+	.product__discount__item:hover .product__discount__item__pic .product__item__pic__hover,
+	.product__item:hover .product__item__pic .product__item__pic__hover,
+	.featured__item:hover .featured__item__pic .featured__item__pic__hover {
 		display: none !important;
+		visibility: hidden !important;
+		opacity: 0 !important;
+		bottom: -120px !important;
+		pointer-events: none !important;
+	}
+
+	/* Slide-out Backdrop Overlay */
+	.liva-filter-overlay {
+		display: block;
+		position: fixed;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.55);
+		z-index: 1040;
+		opacity: 0;
+		visibility: hidden;
+		-webkit-backdrop-filter: blur(2px);
+		backdrop-filter: blur(2px);
+		transition: opacity 0.3s ease, visibility 0.3s ease;
+	}
+
+	.liva-filter-overlay.is-active {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	/* Off-Canvas Slide-Out Sidebar Drawer */
+	.liva-sidebar-wrapper {
+		position: fixed !important;
+		top: 0 !important;
+		left: 0 !important;
+		width: 320px !important;
+		max-width: 86vw !important;
+		height: 100vh !important;
+		background: #ffffff !important;
+		z-index: 1050 !important;
+		overflow-y: auto !important;
+		-webkit-overflow-scrolling: touch !important;
+		padding: 24px 20px 40px !important;
+		box-shadow: 4px 0 30px rgba(0, 0, 0, 0.25) !important;
+		transform: translateX(-100%) !important;
+		transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1) !important;
+	}
+
+	.liva-sidebar-wrapper.is-open {
+		transform: translateX(0) !important;
+	}
+
+	body.liva-filter-open {
+		overflow: hidden !important;
+	}
+
+	.liva-sidebar-wrapper .sidebar {
+		padding: 0 !important;
 	}
 }
 

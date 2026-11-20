@@ -15,10 +15,24 @@
 @section('content')
     <!-- Product Section Begin -->
     <section class="product spad">
+        {{-- Mobile Filter Drawer Overlay --}}
+        <div class="liva-filter-overlay" id="livaFilterOverlay"></div>
+
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-5">
+                <div class="col-lg-3 col-md-5 liva-sidebar-wrapper" id="livaSidebarDrawer">
                     <div class="sidebar">
+                        {{-- Mobile Drawer Header (Only visible on mobile screens < 992px) --}}
+                        <div class="liva-filter-drawer-header d-flex d-lg-none align-items-center justify-content-between mb-3 pb-3" style="border-bottom: 1px solid #e8ede0;">
+                            <div class="d-flex align-items-center" style="gap: 8px;">
+                                <i class="fa fa-sliders" style="color: #7fad39; font-size: 18px;"></i>
+                                <h5 class="mb-0 font-weight-bold" style="color: #1F2421;" data-i18n="filter_products">Filter Products</h5>
+                            </div>
+                            <button type="button" id="livaFilterDrawerClose" class="btn btn-light rounded-circle d-flex align-items-center justify-content-center p-0" style="width: 34px; height: 34px; border: 1px solid #ddd; cursor: pointer;" aria-label="Close filters">
+                                <i class="fa fa-times" style="font-size: 16px; color: #333;"></i>
+                            </button>
+                        </div>
+
                         <div class="sidebar__item">
                             <h4>Department</h4>
                             <ul>
@@ -125,10 +139,16 @@
                                 </label>
                             </div>
                         </div>
-                      
+
+                        {{-- Mobile Apply Filters Button --}}
+                        <div class="d-block d-lg-none mt-4 pt-3" style="border-top: 1px solid #e8ede0;">
+                            <button type="button" id="livaFilterApplyBtn" class="site-btn w-100 py-2" style="font-weight: 700; border-radius: 25px;" data-i18n="apply_filters">
+                                Apply Filters
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-9 col-md-7">
+                <div class="col-lg-9 col-md-12 col-12">
                     @if(!empty($saleProducts) && count($saleProducts) > 0 && empty(request('search')))
                         <div class="product__discount">
                             <div class="section-title product__discount__title">
@@ -191,24 +211,32 @@
 
                     <div class="filter__item">
                         <div class="row align-items-center">
-                            <div class="col-lg-4 col-md-5">
+                            <div class="col-lg-4 col-md-5 col-12 d-flex align-items-center justify-content-between mb-3 mb-md-0">
+                                {{-- Small Mobile Filter Button (Slides out the filter drawer) --}}
+                                <button type="button" class="btn d-inline-flex d-lg-none align-items-center" id="livaFilterDrawerOpen" style="border: 1.5px solid #7fad39; color: #7fad39; font-weight: 700; font-size: 13px; border-radius: 20px; padding: 6px 14px; background: #fff; box-shadow: 0 2px 6px rgba(127,173,57,0.12); cursor: pointer;">
+                                    <i class="fa fa-sliders mr-2"></i> <span data-i18n="filter_btn">Filter</span>
+                                    @if(request('category'))
+                                        <span class="badge badge-success ml-2" style="background:#7fad39; font-size:10px; border-radius: 50%; padding: 2px 5px;">1</span>
+                                    @endif
+                                </button>
+
                                 <div class="filter__sort">
                                     <span>Sort By:</span>
                                     <select onchange="window.location.href=this.value;">
                                         <option value="{{ route('shop.index', array_merge(request()->query(), ['sort' => 'default'])) }}">Featured Botanicals</option>
-                                        <option value="{{ route('shop.index', array_merge(request()->query(), ['sort' => 'price_low'])) }}">Price: Low to High</option>
-                                        <option value="{{ route('shop.index', array_merge(request()->query(), ['sort' => 'price_high'])) }}">Price: High to Low</option>
+                                        <option value="{{ route('shop.index', array_merge(request()->query(), ['sort' => 'price_low'])) }}" @selected(request('sort') === 'price_low')>Price: Low to High</option>
+                                        <option value="{{ route('shop.index', array_merge(request()->query(), ['sort' => 'price_high'])) }}" @selected(request('sort') === 'price_high')>Price: High to Low</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 text-center">
+                            <div class="col-lg-4 col-md-4 col-6 text-left text-md-center">
                                 <div class="filter__found">
                                     <h6><span>{{ count($products) }}</span> Products found</h6>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-3 text-right">
-                                @if(request('category') || request('search'))
-                                    <a href="{{ route('shop.index') }}" class="btn btn-sm btn-outline-secondary" style="font-size: 12px; border-radius: 4px;">
+                            <div class="col-lg-4 col-md-3 col-6 text-right">
+                                @if(request('category') || request('search') || request('sort'))
+                                    <a href="{{ route('shop.index') }}" class="btn btn-sm btn-outline-secondary" style="font-size: 12px; border-radius: 20px; padding: 4px 12px;">
                                         <i class="fa fa-times mr-1"></i> Clear Filter
                                     </a>
                                 @endif
@@ -283,3 +311,40 @@
     </section>
     <!-- Product Section End -->
 @endsection
+
+@push('scripts')
+    <script>
+        (function () {
+            var openBtn = document.getElementById('livaFilterDrawerOpen');
+            var closeBtn = document.getElementById('livaFilterDrawerClose');
+            var applyBtn = document.getElementById('livaFilterApplyBtn');
+            var overlay = document.getElementById('livaFilterOverlay');
+            var drawer = document.getElementById('livaSidebarDrawer');
+
+            function openDrawer() {
+                if (!drawer || !overlay) return;
+                drawer.classList.add('is-open');
+                overlay.classList.add('is-active');
+                document.body.classList.add('liva-filter-open');
+            }
+
+            function closeDrawer() {
+                if (!drawer || !overlay) return;
+                drawer.classList.remove('is-open');
+                overlay.classList.remove('is-active');
+                document.body.classList.remove('liva-filter-open');
+            }
+
+            if (openBtn) openBtn.addEventListener('click', openDrawer);
+            if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+            if (applyBtn) applyBtn.addEventListener('click', closeDrawer);
+            if (overlay) overlay.addEventListener('click', closeDrawer);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && drawer && drawer.classList.contains('is-open')) {
+                    closeDrawer();
+                }
+            });
+        }());
+    </script>
+@endpush

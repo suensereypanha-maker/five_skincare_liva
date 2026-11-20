@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('css/slicknav.min.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ @filemtime(public_path('css/style.css')) ?: '2.2' }}" type="text/css">
 
     @stack('styles')
 </head>
@@ -100,9 +100,9 @@
     <script src="{{ asset('js/jquery.slicknav.js') }}"></script>
     <script src="{{ asset('js/mixitup.min.js') }}"></script>
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
-    <script src="{{ asset('js/liva-i18n.js') }}"></script>
-    <script src="{{ asset('js/liva-social-auth.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}?v={{ @filemtime(public_path('js/main.js')) ?: '2.2' }}"></script>
+    <script src="{{ asset('js/liva-i18n.js') }}?v={{ @filemtime(public_path('js/liva-i18n.js')) ?: '2.2' }}"></script>
+    <script src="{{ asset('js/liva-social-auth.js') }}?v={{ @filemtime(public_path('js/liva-social-auth.js')) ?: '2.2' }}"></script>
 
     @php
         $clientCatalog = [];

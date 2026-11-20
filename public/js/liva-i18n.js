@@ -50,6 +50,9 @@
             filter_body: 'Body Care',
             filter_facial: 'Facial Care',
             filter_sets: 'Sets & Bundles',
+            filter_btn: 'Filter',
+            filter_products: 'Filter Products',
+            apply_filters: 'Apply Filters',
 
             // Product Cards & Cart
             add_to_cart: 'Add to Bag',
@@ -144,6 +147,9 @@
             filter_body: 'ថែរក្សាដងខ្លួន',
             filter_facial: 'ថែរក្សាផ្ទៃមុខ',
             filter_sets: 'ឈុតផលិតផល',
+            filter_btn: 'ចម្រោះ',
+            filter_products: 'ចម្រោះផលិតផល',
+            apply_filters: 'អនុវត្តការចម្រោះ',
 
             // Product Cards & Cart
             add_to_cart: 'បញ្ចូលទៅកន្ត្រក',
