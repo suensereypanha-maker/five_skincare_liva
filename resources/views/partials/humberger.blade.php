@@ -1,5 +1,8 @@
 <div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
+    <div class="humberger__menu__close" role="button" aria-label="Close menu" style="position: absolute; right: 18px; top: 18px; width: 34px; height: 34px; border-radius: 50%; background: #f0f4ec; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; color: #1F2421; transition: all 0.2s;">
+        <i class="fa fa-times"></i>
+    </div>
     <div class="humberger__menu__logo">
         <a href="{{ route('home') }}" class="d-flex align-items-center" style="gap: 10px; text-decoration: none;">
             <img src="{{ asset('img/favicon.svg') }}" alt="LIVA" style="max-height: 40px; width: 40px; border-radius: 8px;">

@@ -19,7 +19,7 @@
                     <img src="{{ asset('img/favicon.svg') }}" alt="LIVA" style="height: 44px; width: 44px; border-radius: 8px;">
                     <div>
                         <span style="font-size: 26px; font-weight: 700; letter-spacing: 0.12em; color: #1F2421; font-family: 'Cormorant Garamond', Georgia, serif; line-height: 1; display: block;">LIVA</span>
-                        <span style="font-size: 11px; letter-spacing: 0.15em; color: #7fad39; text-transform: uppercase; font-weight: 600;">Botanical Skincare</span>
+                        <span style="font-size: 11px; letter-spacing: 0.15em; color: #7fad39; text-transform: uppercase; font-weight: 600;" data-i18n="brand_tagline">Botanical Skincare</span>
                     </div>
                 </a>
             </div>
@@ -43,6 +43,30 @@
                     CONTACT
                 </a>
             </nav>
+
+            {{-- Mobile Actions Bar (Shown on Mobile screens < 768px) --}}
+            <div class="d-flex d-md-none align-items-center" style="gap: 10px; margin-left: auto;">
+                {{-- Mobile Language Switcher --}}
+                <div class="header__top__right__language m-0 p-0" style="margin-right: 2px !important;">
+                    <div class="js-current-lang-label" style="font-size: 12px; font-weight: 700; padding: 4px 8px; background: #f4f6f0; border-radius: 20px; color: #1c1c1c;">🇬🇧 EN</div>
+                    <span class="arrow_carrot-down" style="font-size: 11px;"></span>
+                    <ul style="width: 140px; right: 0; left: auto; border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.2); z-index: 99999;">
+                        <li><a href="javascript:void(0)" onclick="setAppLanguage('en')">🇬🇧 English</a></li>
+                        <li><a href="javascript:void(0)" onclick="setAppLanguage('km')">🇰🇭 ភាសាខ្មែរ</a></li>
+                    </ul>
+                </div>
+
+                {{-- Mobile Bag Icon --}}
+                <a href="{{ route('cart.index') }}" class="position-relative d-flex align-items-center justify-content-center text-dark" style="width: 36px; height: 36px; border-radius: 50%; background: #f4f6f0; text-decoration: none;" title="Shopping Bag">
+                    <i class="fa fa-shopping-bag" style="font-size: 15px; color: #1F2421;"></i>
+                    <span class="cart-badge-count" style="position: absolute; top: -3px; right: -3px; font-size: 9px; font-weight: 700; background-color: #7fad39; color: #fff; border-radius: 50%; min-width: 15px; height: 15px; line-height: 15px; text-align: center; padding: 0 2px;">{{ $globalCartCount ?? \App\Services\CartService::getCount() }}</span>
+                </a>
+
+                {{-- Mobile Hamburger Menu Trigger --}}
+                <div class="humberger__open" role="button" aria-label="Open mobile menu" style="display: flex; align-items: center; justify-content: center; position: static; width: 36px; height: 36px; border-radius: 8px; border: 1.5px solid #7fad39; color: #7fad39; font-size: 16px; cursor: pointer; background: #fbfdf9;">
+                    <i class="fa fa-bars"></i>
+                </div>
+            </div>
         </div>
 
         <div class="row">
@@ -64,23 +88,23 @@
                 </div> --}}
             </div>
             <div class="col-lg-12">
-                <div class="hero__search d-flex align-items-center justify-content-between flex-wrap" style="margin-bottom: 30px; overflow: visible; gap: 15px;">
+                <div class="hero__search d-flex align-items-center justify-content-between flex-wrap" style="margin-bottom: 25px; overflow: visible; gap: 15px;">
                     {{-- Modern Redesigned Search Form --}}
-                    <div class="hero__search__form-modern" style="flex: 1 1 320px; max-width: 480px;">
+                    <div class="hero__search__form-modern" style="flex: 1 1 280px; max-width: 100%;">
                         <form action="{{ route('shop.index') }}" method="GET" style="display: flex; align-items: center; background: #ffffff; border: 2px solid #7fad39; border-radius: 30px; height: 48px; overflow: hidden; padding-left: 16px; box-shadow: 0 2px 8px rgba(127,173,57,0.12); margin: 0;">
                             <i class="fa fa-search" style="color: #7fad39; font-size: 15px; margin-right: 10px;"></i>
-                            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search botanical skincare, hair care, oils..." data-i18n-placeholder="search_placeholder" style="flex: 1; border: none; outline: none; background: transparent; font-size: 14px; color: #1c1c1c; padding: 0 6px; height: 100%;">
+                            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search botanical skincare, hair care, oils..." data-i18n-placeholder="search_placeholder" style="flex: 1; border: none; outline: none; background: transparent; font-size: 14px; color: #1c1c1c; padding: 0 6px; height: 100%; min-width: 0;">
                             @if(request('category'))
                                 <input type="hidden" name="category" value="{{ request('category') }}">
                             @endif
-                            <button type="submit" style="background: #7fad39; color: #ffffff; border: none; height: 100%; padding: 0 24px; font-weight: 700; font-size: 13px; letter-spacing: 1px; cursor: pointer; transition: background 0.3s; display: flex; align-items: center; justify-content: center;" data-i18n="search_btn">
+                            <button type="submit" style="background: #7fad39; color: #ffffff; border: none; height: 100%; padding: 0 20px; font-weight: 700; font-size: 13px; letter-spacing: 1px; cursor: pointer; transition: background 0.3s; display: flex; align-items: center; justify-content: center; flex-shrink: 0;" data-i18n="search_btn">
                                 SEARCH
                             </button>
                         </form>
                     </div>
 
-                    {{-- Phone Support --}}
-                    <div class="hero__search__phone d-flex align-items-center" style="float: none; margin: 0;">
+                    {{-- Phone Support (Hidden on mobile < 992px to prevent clutter) --}}
+                    <div class="hero__search__phone d-none d-lg-flex align-items-center" style="float: none; margin: 0;">
                         <div class="hero__search__phone__icon" style="float: none; margin-right: 12px;">
                             <i class="fa fa-phone"></i>
                         </div>
@@ -90,8 +114,8 @@
                         </div>
                     </div>
 
-                    {{-- Login & Register & Cart (Top Right Placement) --}}
-                    <div class="hero__search__auth d-flex align-items-center" style="margin-left: auto; gap: 10px;">
+                    {{-- Login & Register & Cart (Desktop Placement, hidden on mobile) --}}
+                    <div class="hero__search__auth d-none d-md-flex align-items-center" style="margin-left: auto; gap: 10px;">
                         {{-- Shopping Bag --}}
                         <a href="{{ route('cart.index') }}" class="d-flex align-items-center" style="text-decoration: none; padding: 7px 12px; background: #f5f5f5; border-radius: 25px; transition: all 0.3s;" title="View Shopping Bag">
                             <div style="position: relative; margin-right: 8px; color: #1c1c1c;">

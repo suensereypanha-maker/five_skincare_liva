@@ -76,7 +76,7 @@
                     $feat = $featuredProducts ?? \App\Services\ProductService::getFeatured(8);
                 @endphp
                 @foreach($feat as $prod)
-                    <div class="col-lg-3 col-md-4 col-sm-6 mix {{ $prod['category_id'] }} mb-4">
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-6 mix {{ $prod['category_id'] }} mb-4">
                         <div class="featured__item">
                             <div class="featured__item__pic set-bg" data-setbg="{{ asset($prod['image']) }}" style="position: relative; cursor: pointer;">
                                 <a href="{{ route('shop.show', $prod['id']) }}" class="position-absolute w-100 h-100" style="top: 0; left: 0; z-index: 1;" title="{{ $prod['name'] }}"></a>

@@ -46,7 +46,7 @@
         $("body").addClass("over_hid");
     });
 
-    $(".humberger__menu__overlay").on('click', function () {
+    $(".humberger__menu__overlay, .humberger__menu__close").on('click', function () {
         $(".humberger__menu__wrapper").removeClass("show__humberger__menu__wrapper");
         $(".humberger__menu__overlay").removeClass("active");
         $("body").removeClass("over_hid");

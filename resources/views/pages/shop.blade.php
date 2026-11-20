@@ -216,7 +216,7 @@
                     @else
                         <div class="row">
                             @foreach($products as $product)
-                                <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
+                                <div class="col-lg-4 col-md-6 col-sm-6 col-6 mb-4">
                                     <div class="product__item">
                                         <div class="product__item__pic set-bg" data-setbg="{{ asset($product['image']) }}" style="position: relative; cursor: pointer;">
                                             <a href="{{ route('shop.show', $product['id']) }}" class="position-absolute w-100 h-100" style="top: 0; left: 0; z-index: 1;" title="{{ $product['name'] }}"></a>

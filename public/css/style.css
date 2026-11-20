@@ -3669,3 +3669,142 @@ body.lang-km .primary-btn {
 	transform: translateY(-1px);
 	box-shadow: 0 4px 12px rgba(24, 119, 242, 0.35) !important;
 }
+
+/* ==========================================================================
+   Mobile Responsiveness & Touch Experience Enhancements (< 768px and < 576px)
+   ========================================================================== */
+
+@media only screen and (max-width: 767px) {
+	/* Mobile Hero Banner */
+	.hero__item {
+		padding: 36px 20px !important;
+		height: auto !important;
+		min-height: 320px !important;
+	}
+
+	.hero__text h2 {
+		font-size: 26px !important;
+		line-height: 32px !important;
+		margin: 8px 0 !important;
+	}
+
+	.hero__text p {
+		font-size: 13px !important;
+		margin-bottom: 16px !important;
+	}
+
+	.hero__text .primary-btn {
+		padding: 10px 24px !important;
+		font-size: 12px !important;
+	}
+
+	/* Mobile Product Cards (2-column touch screen layout) */
+	.featured__item,
+	.product__item {
+		margin-bottom: 24px !important;
+	}
+
+	.featured__item__pic,
+	.product__item__pic,
+	.product__discount__item__pic {
+		height: 200px !important;
+		border-radius: 8px;
+	}
+
+	/* Always show product actions on mobile touchscreen */
+	.featured__item__pic__hover,
+	.product__item__pic__hover {
+		bottom: 12px !important;
+		opacity: 1 !important;
+		visibility: visible !important;
+	}
+
+	.featured__item__pic__hover li,
+	.product__item__pic__hover li {
+		margin-right: 4px !important;
+	}
+
+	.featured__item__pic__hover li a,
+	.product__item__pic__hover li a,
+	.featured__item__pic__hover li button,
+	.product__item__pic__hover li button {
+		width: 34px !important;
+		height: 34px !important;
+		line-height: 34px !important;
+		font-size: 13px !important;
+	}
+
+	.featured__item__text h6,
+	.product__item__text h6 {
+		font-size: 13px !important;
+		margin-bottom: 4px !important;
+	}
+
+	.featured__item__text h5,
+	.product__item__text h5 {
+		font-size: 14px !important;
+	}
+
+	/* Cart & Tables Scroll on Mobile */
+	.shoping__cart__table {
+		overflow-x: auto !important;
+		-webkit-overflow-scrolling: touch !important;
+		width: 100% !important;
+		margin-bottom: 20px !important;
+	}
+
+	.shoping__cart__table table {
+		min-width: 580px !important;
+	}
+
+	/* Floating Controls on Mobile */
+	#scrollToTopBtn {
+		bottom: 18px !important;
+		right: 18px !important;
+		width: 38px !important;
+		height: 38px !important;
+		font-size: 16px !important;
+	}
+
+	#cart-toast {
+		left: 15px !important;
+		right: 15px !important;
+		max-width: calc(100% - 30px) !important;
+		bottom: 15px !important;
+		font-size: 13px !important;
+		padding: 12px 16px !important;
+	}
+
+	/* Breadcrumb headers */
+	.breadcrumb__text h2 {
+		font-size: 26px !important;
+	}
+
+	/* Humberger Drawer Close */
+	.humberger__menu__close:hover {
+		background: #e2e8dc !important;
+	}
+}
+
+@media only screen and (max-width: 479px) {
+	.hero__item {
+		padding: 28px 16px !important;
+		min-height: 280px !important;
+	}
+
+	.hero__text h2 {
+		font-size: 22px !important;
+		line-height: 28px !important;
+	}
+
+	.featured__item__pic,
+	.product__item__pic,
+	.product__discount__item__pic {
+		height: 175px !important;
+	}
+
+	.hero__brand-logo span:first-child {
+		font-size: 22px !important;
+	}
+}
+
