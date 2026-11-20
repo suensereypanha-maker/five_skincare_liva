@@ -28,11 +28,6 @@
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
-
     <!-- Humberger Begin -->
     @include('partials.humberger')
     <!-- Humberger End -->
@@ -372,7 +367,43 @@
                 });
             });
         }());
+
+        // Scroll to Top functionality
+        (function () {
+            var scrollBtn = document.getElementById('scrollToTopBtn');
+            if (!scrollBtn) return;
+
+            window.addEventListener('scroll', function () {
+                if (window.pageYOffset > 250) {
+                    scrollBtn.style.display = 'flex';
+                } else {
+                    scrollBtn.style.display = 'none';
+                }
+            });
+
+            scrollBtn.addEventListener('click', function () {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            scrollBtn.addEventListener('mouseenter', function () {
+                scrollBtn.style.backgroundColor = '#1F2421';
+                scrollBtn.style.transform = 'translateY(-3px)';
+            });
+            scrollBtn.addEventListener('mouseleave', function () {
+                scrollBtn.style.backgroundColor = '#7fad39';
+                scrollBtn.style.transform = 'translateY(0)';
+            });
+        }());
     </script>
+
+    <!-- Scroll to Top Button -->
+    <button type="button" id="scrollToTopBtn" aria-label="Scroll to top" title="Scroll to top"
+        style="display: none; position: fixed; bottom: 30px; right: 30px; z-index: 9999; width: 44px; height: 44px; border-radius: 50%; background: #7fad39; color: #fff; border: none; outline: none; cursor: pointer; box-shadow: 0 4px 14px rgba(127, 173, 57, 0.45); transition: all 0.25s ease; align-items: center; justify-content: center; font-size: 20px;">
+        <i class="fa fa-angle-up"></i>
+    </button>
 
     @stack('scripts')
 </body>
