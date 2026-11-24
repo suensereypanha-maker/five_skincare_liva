@@ -116,38 +116,7 @@ jobs:
 
           find site -type f -name "*.html" -exec sed -i 's#http://127.0.0.1:8000#https://suensereypanha-maker.github.io/five_skincare_liva#g' {} +
           touch site/.nojekyll
-
-          cat << 'EOF' > site/404.html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting | LIVA Botanical Skincare</title>
-    <script>
-        (function() {
-            var pathname = window.location.pathname;
-            var repo = '/five_skincare_liva';
-            var path = pathname.indexOf(repo) === 0 ? pathname.substring(repo.length) : pathname;
-            path = path.replace(/^\/+/, '').replace(/\/+$/, '');
-            if (path && path !== '404' && path !== '404.html') {
-                var target = repo + '/' + path + (path.indexOf('.') === -1 ? '/index.html' : '') + window.location.search + window.location.hash;
-                window.location.replace(target);
-            } else {
-                window.location.replace(repo + '/index.html');
-            }
-        })();
-    </script>
-</head>
-<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; display:flex; align-items:center; justify-content:center; height:100vh; margin:0; background:#fbfdf9; color:#1F2421; text-align:center;">
-    <div>
-        <h2 style="color:#7fad39; font-weight:700;">LIVA Botanical Skincare</h2>
-        <p style="color:#666; margin: 12px 0 20px;">Loading botanical experience...</p>
-        <a href="/five_skincare_liva/" style="background:#7fad39; color:#fff; text-decoration:none; padding:10px 22px; border-radius:25px; font-weight:600; font-size:14px;">Return to Home</a>
-    </div>
-</body>
-</html>
-EOF
+          cp public/404.html site/404.html
 
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
