@@ -13,57 +13,74 @@
 <section class="hero {{ $isHome ? '' : 'hero-normal' }}" style="margin-top: 25px; padding-bottom: {{ $isHome ? '50px' : '30px' }};">
     <div class="container">
         {{-- LIVA Botanical Brand Logo & Home Navigation Bar --}}
-        <div class="hero__brand-header d-flex align-items-center justify-content-between mb-4 flex-wrap" style="gap: 15px; border-bottom: 1px solid #f0f3eb; padding-bottom: 16px;">
+        <div class="hero__brand-header d-flex align-items-center justify-content-between mb-4 flex-nowrap" style="gap: 15px; border-bottom: 1px solid #f0f3eb; padding-bottom: 16px;">
             <div class="hero__brand-logo">
                 <a href="{{ route('home') }}" class="d-flex align-items-center" style="gap: 12px; text-decoration: none;" title="LIVA Botanical Skincare - Click to Home">
-                    <img src="{{ asset('img/favicon.svg') }}" alt="LIVA" style="height: 44px; width: 44px; border-radius: 8px;">
-                    <div>
-                        <span style="font-size: 26px; font-weight: 700; letter-spacing: 0.12em; color: #1F2421; font-family: 'Cormorant Garamond', Georgia, serif; line-height: 1; display: block;">LIVA</span>
-                        <span style="font-size: 11px; letter-spacing: 0.15em; color: #7fad39; text-transform: uppercase; font-weight: 600;" data-i18n="brand_tagline">Botanical Skincare</span>
+                    <img src="{{ asset('img/favicon.svg') }}" alt="LIVA" class="hero__brand-img" style="height: 44px; width: 44px; border-radius: 8px; flex-shrink: 0;">
+                    <div class="hero__brand-text" style="min-width: 0;">
+                        <span class="hero__brand-title" style="font-size: 26px; font-weight: 700; letter-spacing: 0.12em; color: #1F2421; font-family: 'Cormorant Garamond', Georgia, serif; line-height: 1; display: block;">LIVA</span>
+                        <span class="hero__brand-tagline" style="font-size: 11px; letter-spacing: 0.15em; color: #7fad39; text-transform: uppercase; font-weight: 600; display: block; white-space: nowrap;" data-i18n="brand_tagline">Botanical Skincare</span>
                     </div>
                 </a>
             </div>
-            <nav class="hero__brand-nav d-none d-md-flex align-items-center" style="gap: 28px;">
-                <a href="{{ route('home') }}" class="d-flex align-items-center" style="font-size: 14px; font-weight: {{ request()->routeIs('home') ? '700' : '600' }}; color: {{ request()->routeIs('home') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px;">
-                    <i class="fa fa-home mr-1"></i> <span data-i18n="home">HOME</span>
-                </a>
-                <a href="{{ route('shop.index') }}" style="font-size: 14px; font-weight: {{ request()->routeIs('shop.*') ? '700' : '600' }}; color: {{ request()->routeIs('shop.*') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px;" data-i18n="shop">
-                    SHOP
-                </a>
-                <a href="{{ route('cart.index') }}" style="font-size: 14px; font-weight: {{ request()->routeIs('cart.*') ? '700' : '600' }}; color: {{ request()->routeIs('cart.*') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px;">
-                    <span data-i18n="shopping_bag">BAG</span> (<span class="cart-nav-count">{{ $globalCartCount ?? \App\Services\CartService::getCount() }}</span>)
-                </a>
-                <a href="{{ route('checkout.index') }}" style="font-size: 14px; font-weight: {{ request()->routeIs('checkout.*') ? '700' : '600' }}; color: {{ request()->routeIs('checkout.*') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px;" data-i18n="checkout">
-                    CHECKOUT
-                </a>
-                <a href="{{ route('blog.index') }}" style="font-size: 14px; font-weight: {{ request()->routeIs('blog.*') ? '700' : '600' }}; color: {{ request()->routeIs('blog.*') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px;" data-i18n="skincare_journal">
-                    JOURNAL
-                </a>
-                <a href="{{ route('contact.index') }}" style="font-size: 14px; font-weight: {{ request()->routeIs('contact.*') ? '700' : '600' }}; color: {{ request()->routeIs('contact.*') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px;" data-i18n="contact">
-                    CONTACT
-                </a>
-            </nav>
+
+            <div class="d-none d-md-flex align-items-center hero__desktop-right" style="gap: 20px; margin-left: auto; flex-shrink: 0;">
+                {{-- Desktop Language Switcher --}}
+                <div class="header__top__right__language hero__lang-switcher m-0 p-0">
+                    <button type="button" class="hero__lang-trigger js-lang-toggle" aria-haspopup="true" aria-expanded="false">
+                        <span class="js-current-lang-label">🇬🇧 English</span>
+                        <span class="arrow_carrot-down"></span>
+                    </button>
+                    <ul>
+                        <li><a href="javascript:void(0)" onclick="setAppLanguage('en')">🇬🇧 English</a></li>
+                        <li><a href="javascript:void(0)" onclick="setAppLanguage('km')">🇰🇭 ភាសាខ្មែរ</a></li>
+                    </ul>
+                </div>
+
+                <nav class="hero__brand-nav d-flex align-items-center" style="gap: 24px;">
+                    <a href="{{ route('home') }}" class="d-flex align-items-center" style="font-size: 14px; font-weight: {{ request()->routeIs('home') ? '700' : '600' }}; color: {{ request()->routeIs('home') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px; white-space: nowrap;">
+                        <i class="fa fa-home mr-1"></i> <span data-i18n="home">HOME</span>
+                    </a>
+                    <a href="{{ route('shop.index') }}" style="font-size: 14px; font-weight: {{ request()->routeIs('shop.*') ? '700' : '600' }}; color: {{ request()->routeIs('shop.*') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px; white-space: nowrap;" data-i18n="shop">
+                        SHOP
+                    </a>
+                    <a href="{{ route('cart.index') }}" style="font-size: 14px; font-weight: {{ request()->routeIs('cart.*') ? '700' : '600' }}; color: {{ request()->routeIs('cart.*') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px; white-space: nowrap;">
+                        <span data-i18n="shopping_bag">BAG</span> (<span class="cart-nav-count">{{ $globalCartCount ?? \App\Services\CartService::getCount() }}</span>)
+                    </a>
+                    <a href="{{ route('checkout.index') }}" style="font-size: 14px; font-weight: {{ request()->routeIs('checkout.*') ? '700' : '600' }}; color: {{ request()->routeIs('checkout.*') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px; white-space: nowrap;" data-i18n="checkout">
+                        CHECKOUT
+                    </a>
+                    <a href="{{ route('blog.index') }}" style="font-size: 14px; font-weight: {{ request()->routeIs('blog.*') ? '700' : '600' }}; color: {{ request()->routeIs('blog.*') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px; white-space: nowrap;" data-i18n="skincare_journal">
+                        JOURNAL
+                    </a>
+                    <a href="{{ route('contact.index') }}" style="font-size: 14px; font-weight: {{ request()->routeIs('contact.*') ? '700' : '600' }}; color: {{ request()->routeIs('contact.*') ? '#7fad39' : '#333' }}; text-decoration: none; letter-spacing: 0.5px; white-space: nowrap;" data-i18n="contact">
+                        CONTACT
+                    </a>
+                </nav>
+            </div>
 
             {{-- Mobile Actions Bar (Shown on Mobile screens < 768px) --}}
-            <div class="d-flex d-md-none align-items-center" style="gap: 10px; margin-left: auto;">
+            <div class="d-flex d-md-none align-items-center hero__mobile-actions" style="gap: 6px; margin-left: auto; flex-shrink: 0;">
                 {{-- Mobile Language Switcher --}}
-                <div class="header__top__right__language m-0 p-0" style="margin-right: 2px !important;">
-                    <div class="js-current-lang-label" style="font-size: 12px; font-weight: 700; padding: 4px 8px; background: #f4f6f0; border-radius: 20px; color: #1c1c1c;">🇬🇧 EN</div>
-                    <span class="arrow_carrot-down" style="font-size: 11px;"></span>
-                    <ul style="width: 140px; right: 0; left: auto; border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.2); z-index: 99999;">
+                <div class="header__top__right__language hero__lang-switcher m-0 p-0">
+                    <button type="button" class="hero__lang-trigger hero__lang-trigger--mobile js-lang-toggle" aria-haspopup="true" aria-expanded="false">
+                        <span class="js-current-lang-label" data-lang-format="short">🇬🇧 EN</span>
+                        <span class="arrow_carrot-down"></span>
+                    </button>
+                    <ul>
                         <li><a href="javascript:void(0)" onclick="setAppLanguage('en')">🇬🇧 English</a></li>
                         <li><a href="javascript:void(0)" onclick="setAppLanguage('km')">🇰🇭 ភាសាខ្មែរ</a></li>
                     </ul>
                 </div>
 
                 {{-- Mobile Bag Icon --}}
-                <a href="{{ route('cart.index') }}" class="position-relative d-flex align-items-center justify-content-center text-dark" style="width: 36px; height: 36px; border-radius: 50%; background: #f4f6f0; text-decoration: none;" title="Shopping Bag">
-                    <i class="fa fa-shopping-bag" style="font-size: 15px; color: #1F2421;"></i>
+                <a href="{{ route('cart.index') }}" class="position-relative d-flex align-items-center justify-content-center text-dark hero__mobile-bag" style="width: 34px; height: 34px; border-radius: 50%; background: #f4f6f0; text-decoration: none; flex-shrink: 0;" title="Shopping Bag">
+                    <i class="fa fa-shopping-bag" style="font-size: 14px; color: #1F2421;"></i>
                     <span class="cart-badge-count" style="position: absolute; top: -3px; right: -3px; font-size: 9px; font-weight: 700; background-color: #7fad39; color: #fff; border-radius: 50%; min-width: 15px; height: 15px; line-height: 15px; text-align: center; padding: 0 2px;">{{ $globalCartCount ?? \App\Services\CartService::getCount() }}</span>
                 </a>
 
                 {{-- Mobile Hamburger Menu Trigger --}}
-                <div class="humberger__open" role="button" aria-label="Open mobile menu" style="display: flex; align-items: center; justify-content: center; position: static; width: 36px; height: 36px; border-radius: 8px; border: 1.5px solid #7fad39; color: #7fad39; font-size: 16px; cursor: pointer; background: #fbfdf9;">
+                <div class="humberger__open" role="button" aria-label="Open mobile menu" style="display: flex; align-items: center; justify-content: center; position: static; width: 34px; height: 34px; border-radius: 8px; border: 1.5px solid #7fad39; color: #7fad39; font-size: 15px; cursor: pointer; background: #fbfdf9; flex-shrink: 0;">
                     <i class="fa fa-bars"></i>
                 </div>
             </div>
@@ -85,8 +102,8 @@
                             </li>
                         @endforeach
                     </ul>
-                </div> --}}
-            </div>
+                </div>
+            </div> --}}
             <div class="col-lg-12">
                 <div class="hero__search d-flex align-items-center justify-content-between flex-wrap" style="margin-bottom: 25px; overflow: visible; gap: 15px;">
                     {{-- Modern Redesigned Search Form --}}

@@ -13,37 +13,37 @@
                 <div class="categories__slider owl-carousel">
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="{{ asset('img/shampoo.webp') }}">
-                            <h5><a href="{{ route('shop.index', ['category' => 'haircare']) }}">Hair Care</a></h5>
+                            <h5><a href="{{ route('shop.index', ['category' => 'haircare']) }}" data-i18n="hair_care">Hair Care</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="{{ asset('img/conditioner.webp') }}">
-                            <h5><a href="{{ route('shop.index', ['category' => 'haircare']) }}">Conditioner</a></h5>
+                            <h5><a href="{{ route('shop.index', ['category' => 'haircare']) }}" data-i18n="conditioner">Conditioner</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="{{ asset('img/hair-mask.png') }}">
-                            <h5><a href="{{ route('shop.index', ['category' => 'haircare']) }}">Hair Mask</a></h5>
+                            <h5><a href="{{ route('shop.index', ['category' => 'haircare']) }}" data-i18n="hair_mask">Hair Mask</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="{{ asset('img/shower-gel.png') }}">
-                            <h5><a href="{{ route('shop.index', ['category' => 'bodycare']) }}">Body Wash</a></h5>
+                            <h5><a href="{{ route('shop.index', ['category' => 'bodycare']) }}" data-i18n="body_wash">Body Wash</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="{{ asset('img/body-lotion.webp') }}">
-                            <h5><a href="{{ route('shop.index', ['category' => 'bodycare']) }}">Body Lotion</a></h5>
+                            <h5><a href="{{ route('shop.index', ['category' => 'bodycare']) }}" data-i18n="body_lotion">Body Lotion</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="{{ asset('img/botanical.png') }}">
-                            <h5><a href="{{ route('shop.index', ['category' => 'facialcare']) }}">Facial Care</a></h5>
+                            <h5><a href="{{ route('shop.index', ['category' => 'facialcare']) }}" data-i18n="facial_care">Facial Care</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="{{ asset('img/daily-edit.webp') }}">
-                            <h5><a href="{{ route('shop.index', ['category' => 'sets']) }}">Rituals &amp; Sets</a></h5>
+                            <h5><a href="{{ route('shop.index', ['category' => 'sets']) }}" data-i18n="rituals_sets">Rituals &amp; Sets</a></h5>
                         </div>
                     </div>
                 </div>
@@ -156,7 +156,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title from-blog__title">
-                        <h2>From The Skincare Journal</h2>
+                        <h2 data-i18n="journal_title">From The Skincare Journal</h2>
                     </div>
                 </div>
             </div>

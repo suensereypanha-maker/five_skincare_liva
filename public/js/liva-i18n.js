@@ -45,6 +45,7 @@
             facial_care: 'Facial Care',
             rituals_sets: 'Rituals & Sets',
             featured_title: 'Featured Botanicals',
+            journal_title: 'From The Skincare Journal',
             filter_all: 'All',
             filter_hair: 'Hair Care',
             filter_body: 'Body Care',
@@ -142,6 +143,7 @@
             facial_care: 'ថែរក្សាផ្ទៃមុខ',
             rituals_sets: 'ឈុតថែរក្សាសម្រស់',
             featured_title: 'ផលិតផលធម្មជាតិពេញនិយម',
+            journal_title: 'ពីកំណត់ហេតុថែរក្សាស្បែក',
             filter_all: 'ទាំងអស់',
             filter_hair: 'ថែរក្សាសក់',
             filter_body: 'ថែរក្សាដងខ្លួន',
@@ -224,7 +226,21 @@
         // Update language indicator in headers
         var currentLabels = document.querySelectorAll('.js-current-lang-label');
         currentLabels.forEach(function (el) {
-            el.innerHTML = lang === 'km' ? '🇰🇭 ភាសាខ្មែរ' : '🇬🇧 English';
+            var isShort = el.getAttribute('data-lang-format') === 'short';
+            if (isShort) {
+                el.textContent = lang === 'km' ? '🇰🇭 KH' : '🇬🇧 EN';
+            } else {
+                el.textContent = lang === 'km' ? '🇰🇭 ភាសាខ្មែរ' : '🇬🇧 English';
+            }
+        });
+
+        // Close any open language dropdowns after switching
+        document.querySelectorAll('.header__top__right__language.is-open').forEach(function (dropdown) {
+            dropdown.classList.remove('is-open');
+            var toggle = dropdown.querySelector('.js-lang-toggle');
+            if (toggle) {
+                toggle.setAttribute('aria-expanded', 'false');
+            }
         });
 
         // Translate text elements
@@ -267,12 +283,45 @@
     };
     window.setAppLanguage = setAppLanguage;
 
+    function bindLanguageDropdowns() {
+        document.addEventListener('click', function (event) {
+            var toggle = event.target.closest('.js-lang-toggle');
+            if (toggle) {
+                event.preventDefault();
+                event.stopPropagation();
+                var container = toggle.closest('.header__top__right__language');
+                if (!container) return;
+                var willOpen = !container.classList.contains('is-open');
+                document.querySelectorAll('.header__top__right__language.is-open').forEach(function (el) {
+                    el.classList.remove('is-open');
+                    var btn = el.querySelector('.js-lang-toggle');
+                    if (btn) btn.setAttribute('aria-expanded', 'false');
+                });
+                if (willOpen) {
+                    container.classList.add('is-open');
+                    toggle.setAttribute('aria-expanded', 'true');
+                }
+                return;
+            }
+
+            if (!event.target.closest('.header__top__right__language')) {
+                document.querySelectorAll('.header__top__right__language.is-open').forEach(function (el) {
+                    el.classList.remove('is-open');
+                    var btn = el.querySelector('.js-lang-toggle');
+                    if (btn) btn.setAttribute('aria-expanded', 'false');
+                });
+            }
+        });
+    }
+
     // Initialize on DOM ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function () {
+            bindLanguageDropdowns();
             setAppLanguage(getCurrentLanguage());
         });
     } else {
+        bindLanguageDropdowns();
         setAppLanguage(getCurrentLanguage());
     }
 }(window));

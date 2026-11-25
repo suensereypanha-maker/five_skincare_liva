@@ -24,10 +24,12 @@
         </div>
     </div>
     <div class="humberger__menu__widget">
-        <div class="header__top__right__language">
-            <div class="js-current-lang-label">🇬🇧 English</div>
-            <span class="arrow_carrot-down"></span>
-            <ul style="width: 140px; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 9999;">
+        <div class="header__top__right__language hero__lang-switcher">
+            <button type="button" class="hero__lang-trigger js-lang-toggle" aria-haspopup="true" aria-expanded="false">
+                <span class="js-current-lang-label">🇬🇧 English</span>
+                <span class="arrow_carrot-down"></span>
+            </button>
+            <ul style="width: 150px; left: 0; right: auto; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 9999;">
                 <li><a href="javascript:void(0)" onclick="setAppLanguage('en')">🇬🇧 English</a></li>
                 <li><a href="javascript:void(0)" onclick="setAppLanguage('km')">🇰🇭 ភាសាខ្មែរ</a></li>
             </ul>
