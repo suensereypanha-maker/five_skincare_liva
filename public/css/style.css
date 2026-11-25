@@ -820,7 +820,7 @@ ol {
 .categories__slider.owl-carousel .owl-nav button.owl-next {
 	left: auto;
 	right: -35px;
-	 display: none;
+	display: none;
 }
 
 /*---------------------
@@ -3835,7 +3835,9 @@ body.lang-km .primary-btn {
 	display: none;
 }
 
-@media only screen and (max-width: 991px), (hover: none) {
+@media only screen and (max-width: 991px),
+(hover: none) {
+
 	/* Completely eliminate floating hover overlays on mobile/touchscreens so product photos and faces are never obscured */
 	.featured__item__pic__hover,
 	.product__item__pic__hover,
@@ -3900,6 +3902,7 @@ body.lang-km .primary-btn {
 }
 
 @media only screen and (max-width: 767px) {
+
 	html,
 	body {
 		overflow-x: hidden;
@@ -4237,5 +4240,3 @@ body.lang-km .primary-btn {
 		letter-spacing: 0.05em !important;
 	}
 }
-
-
