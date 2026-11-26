@@ -1,12 +1,11 @@
 <div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
-    <div class="humberger__menu__close" role="button" aria-label="Close menu" style="position: absolute; right: 18px; top: 18px; width: 34px; height: 34px; border-radius: 50%; background: #f0f4ec; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; color: #1F2421; transition: all 0.2s;">
+    <div class="humberger__menu__close" role="button" aria-label="Close menu" style="position: absolute; right: 18px; top: 18px; width: 34px; height: 34px; border-radius: 50%; background: #f5f2ec; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; color: #1F2421; transition: all 0.2s;">
         <i class="fa fa-times"></i>
     </div>
     <div class="humberger__menu__logo">
-        <a href="{{ route('home') }}" class="d-flex align-items-center" style="gap: 10px; text-decoration: none;">
-            <img src="{{ asset('img/favicon.svg') }}" alt="LIVA" style="max-height: 40px; width: 40px; border-radius: 8px;">
-            <span style="font-size: 24px; font-weight: 700; letter-spacing: 0.12em; color: #1F2421; font-family: 'Cormorant Garamond', Georgia, serif;">LIVA</span>
+        <a href="{{ route('home') }}" class="d-flex align-items-center" style="text-decoration: none;">
+            <img src="{{ asset('img/liva-logo.webp') }}" alt="LIVA Botanical Skincare" style="max-height: 44px; width: auto; object-fit: contain;">
         </a>
     </div>
     <div class="humberger__menu__cart">
@@ -48,7 +47,7 @@
             @else
                 <a href="{{ route('login') }}" style="display: inline-block; font-weight: 600; color: #1c1c1c;"><i class="fa fa-user mr-1"></i> <span data-i18n="login">Login</span></a>
                 <span style="margin: 0 6px; color: #bbb;">/</span>
-                <a href="{{ route('register') }}" style="display: inline-block; font-weight: 600; color: #7fad39;" data-i18n="register">Register</a>
+                <a href="{{ route('register') }}" style="display: inline-block; font-weight: 600; color: #b8975a;" data-i18n="register">Register</a>
             @endauth
         </div>
     </div>

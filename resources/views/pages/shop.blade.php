@@ -23,9 +23,9 @@
                 <div class="col-lg-3 col-md-5 liva-sidebar-wrapper" id="livaSidebarDrawer">
                     <div class="sidebar">
                         {{-- Mobile Drawer Header (Only visible on mobile screens < 992px) --}}
-                        <div class="liva-filter-drawer-header d-flex d-lg-none align-items-center justify-content-between mb-3 pb-3" style="border-bottom: 1px solid #e8ede0;">
+                        <div class="liva-filter-drawer-header d-flex d-lg-none align-items-center justify-content-between mb-3 pb-3" style="border-bottom: 1px solid #eae4d9;">
                             <div class="d-flex align-items-center" style="gap: 8px;">
-                                <i class="fa fa-sliders" style="color: #7fad39; font-size: 18px;"></i>
+                                <i class="fa fa-sliders" style="color: #b8975a; font-size: 18px;"></i>
                                 <h5 class="mb-0 font-weight-bold" style="color: #1F2421;" data-i18n="filter_products">Filter Products</h5>
                             </div>
                             <button type="button" id="livaFilterDrawerClose" class="btn btn-light rounded-circle d-flex align-items-center justify-content-center p-0" style="width: 34px; height: 34px; border: 1px solid #ddd; cursor: pointer;" aria-label="Close filters">
@@ -37,32 +37,32 @@
                             <h4>Department</h4>
                             <ul>
                                 <li>
-                                    <a href="{{ route('shop.index') }}" style="{{ empty(request('category')) ? 'font-weight: 700; color: #7fad39;' : '' }}">
+                                    <a href="{{ route('shop.index') }}" style="{{ empty(request('category')) ? 'font-weight: 700; color: #b8975a;' : '' }}">
                                         All Botanical Products ({{ $totalProductsCount ?? 10 }})
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('shop.index', ['category' => 'haircare']) }}" style="{{ request('category') === 'haircare' ? 'font-weight: 700; color: #7fad39;' : '' }}">
+                                    <a href="{{ route('shop.index', ['category' => 'haircare']) }}" style="{{ request('category') === 'haircare' ? 'font-weight: 700; color: #b8975a;' : '' }}">
                                         Hair Care &amp; Scalp (3)
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('shop.index', ['category' => 'bodycare']) }}" style="{{ request('category') === 'bodycare' ? 'font-weight: 700; color: #7fad39;' : '' }}">
+                                    <a href="{{ route('shop.index', ['category' => 'bodycare']) }}" style="{{ request('category') === 'bodycare' ? 'font-weight: 700; color: #b8975a;' : '' }}">
                                         Body Wash &amp; Lotion (2)
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('shop.index', ['category' => 'facialcare']) }}" style="{{ request('category') === 'facialcare' ? 'font-weight: 700; color: #7fad39;' : '' }}">
+                                    <a href="{{ route('shop.index', ['category' => 'facialcare']) }}" style="{{ request('category') === 'facialcare' ? 'font-weight: 700; color: #b8975a;' : '' }}">
                                         Facial Care &amp; Serums (2)
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('shop.index', ['category' => 'sets']) }}" style="{{ request('category') === 'sets' ? 'font-weight: 700; color: #7fad39;' : '' }}">
+                                    <a href="{{ route('shop.index', ['category' => 'sets']) }}" style="{{ request('category') === 'sets' ? 'font-weight: 700; color: #b8975a;' : '' }}">
                                         Botanical Rituals &amp; Sets (2)
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('shop.index', ['category' => 'travel']) }}" style="{{ request('category') === 'travel' ? 'font-weight: 700; color: #7fad39;' : '' }}">
+                                    <a href="{{ route('shop.index', ['category' => 'travel']) }}" style="{{ request('category') === 'travel' ? 'font-weight: 700; color: #b8975a;' : '' }}">
                                         Travel Essentials (1)
                                     </a>
                                 </li>
@@ -141,7 +141,7 @@
                         </div>
 
                         {{-- Mobile Apply Filters Button --}}
-                        <div class="d-block d-lg-none mt-4 pt-3" style="border-top: 1px solid #e8ede0;">
+                        <div class="d-block d-lg-none mt-4 pt-3" style="border-top: 1px solid #eae4d9;">
                             <button type="button" id="livaFilterApplyBtn" class="site-btn w-100 py-2" style="font-weight: 700; border-radius: 25px;" data-i18n="apply_filters">
                                 Apply Filters
                             </button>
@@ -190,13 +190,13 @@
                                                             @csrf
                                                             <input type="hidden" name="product_id" value="{{ $sale['id'] }}">
                                                             <input type="hidden" name="quantity" value="1">
-                                                            <button type="submit" class="site-btn py-1 px-3 w-100" style="font-size: 12px; height: 34px; border-radius: 20px; font-weight: 700; letter-spacing: 0.5px;">
+                                                            <button type="submit" class="site-btn py-1 px-3 w-100 d-inline-flex align-items-center justify-content-center" style="font-size: 12px; height: 34px; border-radius: 20px; font-weight: 700; letter-spacing: 0.5px;">
                                                                 <i class="fa fa-shopping-bag mr-1"></i> <span data-i18n="add_to_cart">Add to Bag</span>
                                                             </button>
                                                         </form>
                                                     </div>
                                                     {{-- <div class="mt-2">
-                                                        <a href="{{ route('shop.show', $sale['id']) }}" class="btn btn-sm" style="border: 1px solid #7fad39; color: #7fad39; font-weight: 700; font-size: 12px; padding: 4px 14px; border-radius: 20px; text-decoration: none;">
+                                                        <a href="{{ route('shop.show', $sale['id']) }}" class="btn btn-sm" style="border: 1px solid #b8975a; color: #b8975a; font-weight: 700; font-size: 12px; padding: 4px 14px; border-radius: 20px; text-decoration: none;">
                                                             See Details <i class="fa fa-arrow-right ml-1"></i>
                                                         </a>
                                                     </div> --}}
@@ -213,10 +213,10 @@
                         <div class="row align-items-center">
                             <div class="col-lg-4 col-md-5 col-12 d-flex align-items-center justify-content-between mb-3 mb-md-0">
                                 {{-- Small Mobile Filter Button (Slides out the filter drawer) --}}
-                                <button type="button" class="btn d-inline-flex d-lg-none align-items-center" id="livaFilterDrawerOpen" style="border: 1.5px solid #7fad39; color: #7fad39; font-weight: 700; font-size: 13px; border-radius: 20px; padding: 6px 14px; background: #fff; box-shadow: 0 2px 6px rgba(127,173,57,0.12); cursor: pointer;">
+                                <button type="button" class="btn d-inline-flex d-lg-none align-items-center" id="livaFilterDrawerOpen" style="border: 1.5px solid #b8975a; color: #b8975a; font-weight: 700; font-size: 13px; border-radius: 20px; padding: 6px 14px; background: #fff; box-shadow: 0 2px 6px rgba(184, 151, 90,0.12); cursor: pointer;">
                                     <i class="fa fa-sliders mr-2"></i> <span data-i18n="filter_btn">Filter</span>
                                     @if(request('category'))
-                                        <span class="badge badge-success ml-2" style="background:#7fad39; font-size:10px; border-radius: 50%; padding: 2px 5px;">1</span>
+                                        <span class="badge ml-2" style="background:#b8975a; font-size:10px; border-radius: 50%; padding: 2px 5px;">1</span>
                                     @endif
                                 </button>
 

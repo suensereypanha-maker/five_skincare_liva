@@ -40,7 +40,7 @@
         <div class="container">
             <div class="row" id="checkout-empty-state" style="{{ (empty($cart) || count($cart) === 0) ? '' : 'display: none;' }}">
                 <div class="col-lg-12 text-center py-5" style="background: #fafafa; border-radius: 8px;">
-                    <div style="font-size: 54px; color: #7fad39; margin-bottom: 20px;">
+                    <div style="font-size: 54px; color: #b8975a; margin-bottom: 20px;">
                         <i class="fa fa-shopping-bag"></i>
                     </div>
                     <h3>Your Botanical Bag is Empty</h3>
@@ -93,7 +93,7 @@
                         </div>
 
                         <div class="col-lg-5 col-md-6">
-                            <div class="checkout__order" style="background: #fdfdfc; border: 1px solid #e1e7db; border-radius: 8px;">
+                            <div class="checkout__order" style="background: #fdfdfc; border: 1px solid #eae4d9; border-radius: 8px;">
                                 <h4>Your Botanical Order</h4>
                                 <div class="checkout__order__products">Botanical Item <span>Total</span></div>
                                 <ul id="checkout-order-items" style="border-bottom: 1px solid #ebebeb; padding-bottom: 15px; margin-bottom: 15px;">
@@ -101,7 +101,7 @@
                                         <li class="d-flex justify-content-between align-items-center mb-2" style="font-size: 14px;">
                                             <span>
                                                 {{ $item['name'] }}
-                                                <strong style="color: #7fad39;">&times; {{ $item['quantity'] }}</strong>
+                                                <strong style="color: #b8975a;">&times; {{ $item['quantity'] }}</strong>
                                             </span>
                                             <span style="font-weight: 600;">
                                                 ${{ number_format($item['price'] * $item['quantity'], 2) }}
@@ -137,7 +137,7 @@
                                         </label>
                                     </div>
                                     <div id="aba-qr-panel" class="payment-qr-panel{{ $selectedPaymentMethod === 'aba' ? ' is-open' : '' }}" aria-hidden="{{ $selectedPaymentMethod === 'aba' ? 'false' : 'true' }}">
-                                        <div class="p-3 mb-3 text-center" style="background: #f7faf4; border: 1px solid #cce5b8; border-radius: 8px;">
+                                        <div class="p-3 mb-3 text-center" style="background: #faf8f4; border: 1px solid #dfd3bc; border-radius: 8px;">
                                             <p class="text-muted mb-3" style="font-size: 13px;">Scan this KHQR with ABA Mobile or any Bakong app to pay <strong>${{ number_format($total, 2) }}</strong>.</p>
                                             <img src="{{ asset('img/payments/aba-khqr.png') }}" alt="ABA KHQR" style="max-width: 200px; width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
                                         </div>
@@ -154,7 +154,7 @@
                                         </label>
                                     </div>
                                     <div id="canadia-qr-panel" class="payment-qr-panel{{ $selectedPaymentMethod === 'canadia' ? ' is-open' : '' }}" aria-hidden="{{ $selectedPaymentMethod === 'canadia' ? 'false' : 'true' }}">
-                                        <div class="p-3 mb-3 text-center" style="background: #f7faf4; border: 1px solid #cce5b8; border-radius: 8px;">
+                                        <div class="p-3 mb-3 text-center" style="background: #faf8f4; border: 1px solid #dfd3bc; border-radius: 8px;">
                                             <p class="text-muted mb-3" style="font-size: 13px;">Scan this KHQR with Canadia Mobile or any Bakong app to pay <strong>${{ number_format($total, 2) }}</strong>.</p>
                                             <img src="{{ asset('img/payments/canadia-khqr.png') }}" alt="Canadia KHQR" style="max-width: 200px; width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
                                         </div>
@@ -171,7 +171,7 @@
                                         </label>
                                     </div>
                                     <div id="acleda-qr-panel" class="payment-qr-panel{{ $selectedPaymentMethod === 'acleda' ? ' is-open' : '' }}" aria-hidden="{{ $selectedPaymentMethod === 'acleda' ? 'false' : 'true' }}">
-                                        <div class="p-3 mb-3 text-center" style="background: #f7faf4; border: 1px solid #cce5b8; border-radius: 8px;">
+                                        <div class="p-3 mb-3 text-center" style="background: #faf8f4; border: 1px solid #dfd3bc; border-radius: 8px;">
                                             <p class="text-muted mb-3" style="font-size: 13px;">Scan this KHQR with ACLEDA Mobile or any Bakong app to pay <strong>${{ number_format($total, 2) }}</strong>.</p>
                                             <img src="{{ asset('img/payments/canadia-khqr.png') }}" alt="KHQR for ACLEDA payments" style="max-width: 200px; width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
                                         </div>
@@ -188,7 +188,7 @@
                                         </label>
                                     </div>
                                     <div id="wing-qr-panel" class="payment-qr-panel{{ $selectedPaymentMethod === 'wing' ? ' is-open' : '' }}" aria-hidden="{{ $selectedPaymentMethod === 'wing' ? 'false' : 'true' }}">
-                                        <div class="p-3 mb-3 text-center" style="background: #f7faf4; border: 1px solid #cce5b8; border-radius: 8px;">
+                                        <div class="p-3 mb-3 text-center" style="background: #faf8f4; border: 1px solid #dfd3bc; border-radius: 8px;">
                                             <p class="text-muted mb-3" style="font-size: 13px;">Scan this KHQR with Wing Bank App or any Bakong app to pay <strong>${{ number_format($total, 2) }}</strong>.</p>
                                             <img src="{{ asset('img/payments/canadia-khqr.png') }}" alt="KHQR for Wing payments" style="max-width: 200px; width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
                                         </div>
@@ -197,7 +197,7 @@
                                     <div class="payment-option p-3 mb-3" style="background: #fff; border: 1px solid #ddd; border-radius: 6px;">
                                         <label class="d-flex align-items-center mb-0" style="cursor: pointer; width: 100%;">
                                             <input type="radio" name="payment_method" value="cod" @checked($selectedPaymentMethod === 'cod') style="margin-right: 12px;">
-                                            <i class="fa fa-money fa-lg text-success mr-2" style="font-size: 22px;"></i>
+                                            <i class="fa fa-money fa-lg mr-2" style="font-size: 22px;"></i>
                                             <div>
                                                 <strong>Cash on Delivery (COD)</strong>
                                                 <div style="font-size: 11px; color: #888;">Pay cash when receiving your parcel</div>
@@ -257,7 +257,7 @@
                             li.className = 'd-flex justify-content-between align-items-center mb-2';
                             li.style.fontSize = '14px';
                             li.innerHTML =
-                                '<span>' + item.name + ' <strong style="color: #7fad39;">&times; ' + item.quantity + '</strong></span>' +
+                                '<span>' + item.name + ' <strong style="color: #b8975a;">&times; ' + item.quantity + '</strong></span>' +
                                 '<span style="font-weight: 600;">$' + (item.price * item.quantity).toFixed(2) + '</span>';
                             itemsList.appendChild(li);
                         }

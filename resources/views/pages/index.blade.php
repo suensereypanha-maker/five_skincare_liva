@@ -128,14 +128,14 @@
     <div class="banner">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 mb-3 mb-sm-0">
                     <div class="banner__pic">
                         <a href="{{ route('shop.index', ['category' => 'sets']) }}">
                             <img src="{{ asset('img/campaign/everyday-poster.webp') }}" alt="LIVA Everyday Ritual" style="border-radius: 8px;">
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 mb-3 mb-sm-0">
                     <div class="banner__pic">
                         <a href="{{ route('shop.index') }}">
                             <img src="{{ asset('img/banners/banner-2.webp') }}" alt="LIVA Botanical Collection" style="border-radius: 8px;">

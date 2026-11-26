@@ -19,7 +19,7 @@
             @if(empty($cart) || count($cart) === 0)
                 <div class="row" id="liva-cart-empty-view">
                     <div class="col-lg-12 text-center py-5" style="background: #fafafa; border-radius: 8px;">
-                        <div style="font-size: 54px; color: #7fad39; margin-bottom: 20px;">
+                        <div style="font-size: 54px; color: #b8975a; margin-bottom: 20px;">
                             <i class="fa fa-shopping-bag"></i>
                         </div>
                         <h3>Your Botanical Bag is Empty</h3>

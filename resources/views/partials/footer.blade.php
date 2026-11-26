@@ -4,9 +4,8 @@
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="footer__about">
                     <div class="footer__about__logo">
-                        <a href="{{ route('home') }}" class="d-flex align-items-center" style="gap: 10px; text-decoration: none;">
-                            <img src="{{ asset('img/favicon.svg') }}" alt="LIVA" style="max-height: 44px; width: 44px; border-radius: 8px;">
-                            <span style="font-size: 26px; font-weight: 700; letter-spacing: 0.12em; color: #1F2421; font-family: 'Cormorant Garamond', Georgia, serif;">LIVA</span>
+                        <a href="{{ route('home') }}" class="d-flex align-items-center" style="text-decoration: none;">
+                            <img src="{{ asset('img/liva-logo.webp') }}" alt="LIVA Botanical Skincare" style="max-height: 52px; width: auto; object-fit: contain;">
                         </a>
                     </div>
                     <ul>

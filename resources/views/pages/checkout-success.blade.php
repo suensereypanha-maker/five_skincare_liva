@@ -19,12 +19,12 @@
                 <div class="col-lg-8">
                     <div class="card border-0 shadow-sm p-4 p-md-5" style="border-radius: 12px; background: #fff;">
                         <div class="text-center mb-4">
-                            <div style="width: 72px; height: 72px; background: #eaf5ea; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 20px;">
-                                <i class="fa fa-check text-success fa-2x"></i>
+                            <div style="width: 72px; height: 72px; background: #f7f3eb; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                                <i class="fa fa-check fa-2x" style="color: #b8975a;"></i>
                             </div>
                             <h2 style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; color: #1F2421;">Thank You For Your Order!</h2>
                             <p class="text-muted">Your botanical order has been received and is being prepared with organic care.</p>
-                            <span class="badge badge-light px-3 py-2" style="font-size: 15px; background: #f0f7e9; color: #4b6b23; border: 1px dashed #7fad39;">
+                            <span class="badge badge-light px-3 py-2" style="font-size: 15px; background: #f7f3eb; color: #8f713b; border: 1px dashed #b8975a;">
                                 Order Reference: <strong>#{{ $order['order_id'] ?? 'LIVA-ORDER' }}</strong>
                             </span>
                         </div>
@@ -46,8 +46,8 @@
                         </div>
 
                         @if(in_array(($order['payment_method'] ?? ''), ['aba', 'canadia', 'acleda', 'wing'], true))
-                            <div class="p-3 mb-4 text-center" style="background: #f7faf4; border: 1px solid #cce5b8; border-radius: 8px;">
-                                <h6 style="color: #4b6b23; font-weight: 700; margin-bottom: 8px;">
+                            <div class="p-3 mb-4 text-center" style="background: #faf8f4; border: 1px solid #dfd3bc; border-radius: 8px;">
+                                <h6 style="color: #8f713b; font-weight: 700; margin-bottom: 8px;">
                                     @if(($order['payment_method'] ?? '') === 'canadia')
                                         <img src="{{ asset('img/payments/canadia-logo.png') }}" alt="Canadia Bank" style="height: 20px; margin-right: 8px;">
                                         Scan with Canadia Mobile or any Bakong App
@@ -103,7 +103,7 @@
                         </div>
                         <div class="d-flex justify-content-between pt-2 border-top mb-4" style="font-size: 18px;">
                             <span class="font-weight-bold">Grand Total</span>
-                            <span class="font-weight-bold text-success">${{ number_format($order['total'] ?? 0, 2) }}</span>
+                            <span class="font-weight-bold" style="color: #8f713b;">${{ number_format($order['total'] ?? 0, 2) }}</span>
                         </div>
 
                         <div class="text-center pt-2">

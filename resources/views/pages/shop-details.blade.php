@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
-                        <span class="badge badge-light" style="font-size: 13px; color: #7fad39; background: #f0f7e9; padding: 6px 12px; margin-bottom: 10px; border-radius: 4px;">
+                        <span class="badge badge-light" style="font-size: 13px; color: #b8975a; background: #f7f3eb; padding: 6px 12px; margin-bottom: 10px; border-radius: 4px;">
                             {{ $product['category_name'] }}
                         </span>
                         <h3>{{ $product['name'] }}</h3>
@@ -78,14 +78,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="primary-btn border-0" style="cursor: pointer; padding: 14px 30px; letter-spacing: 1px;">
-                                <i class="fa fa-shopping-bag mr-2"></i> ADD TO BAG
-                            </button>
-                            <a href="#" class="heart-icon" title="Save to Favorites"><span class="icon_heart_alt"></span></a>
+                            <div class="d-flex align-items-center flex-nowrap product__details__actions" style="gap: 12px;">
+                                <button type="submit" class="primary-btn border-0" style="cursor: pointer; padding: 14px 30px; letter-spacing: 1px; white-space: nowrap;">
+                                    <i class="fa fa-shopping-bag mr-2"></i> ADD TO BAG
+                                </button>
+                                <a href="#" class="heart-icon flex-shrink-0" title="Save to Favorites"><span class="icon_heart_alt"></span></a>
+                            </div>
                         </form>
 
                         <ul>
-                            <li><b>Availability</b> <span style="color: #28a745;"><i class="fa fa-check-circle"></i> {{ $product['stock'] ?? 'In Stock' }}</span></li>
+                            <li><b>Availability</b> <span style="color: #8f713b;"><i class="fa fa-check-circle"></i> {{ $product['stock'] ?? 'In Stock' }}</span></li>
                             <li><b>Skin Type</b> <span>{{ $product['skin_type'] ?? 'All Skin Types' }}</span></li>
                             <li><b>Net Volume / Size</b> <span>{{ $product['size'] ?? 'Standard' }}</span></li>
                             <li><b>Shipping</b> <span>Same-day dispatch. <samp>Free shipping over $50</samp></span></li>
@@ -126,7 +128,7 @@
                                         <ul style="list-style-type: none; padding-left: 0;">
                                             @foreach($product['features'] as $feature)
                                                 <li style="margin-bottom: 8px;">
-                                                    <i class="fa fa-check text-success mr-2"></i> {{ $feature }}
+                                                    <i class="fa fa-check mr-2" style="color: #b8975a;"></i> {{ $feature }}
                                                 </li>
                                             @endforeach
                                         </ul>
@@ -140,22 +142,22 @@
                                     
                                     <div class="row mt-4 mb-4">
                                         <div class="col-md-4 mb-3">
-                                            <div class="p-3 h-100" style="background: #f7faf4; border-radius: 8px; border-left: 3px solid #7fad39;">
-                                                <span class="badge badge-success mb-2" style="background-color: #7fad39; font-size: 11px;">STEP 01</span>
+                                            <div class="p-3 h-100" style="background: #faf8f4; border-radius: 8px; border-left: 3px solid #b8975a;">
+                                                <span class="badge mb-2" style="background-color: #b8975a; font-size: 11px;">STEP 01</span>
                                                 <h6 style="font-size: 14px; font-weight: 700; margin-bottom: 6px;">Dispense &amp; Warm</h6>
                                                 <p class="mb-0 text-muted" style="font-size: 13px;">Dispense an appropriate amount into the palm of clean hands. Gently warm between palms for 3 seconds to activate delicate botanical plant essences.</p>
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
-                                            <div class="p-3 h-100" style="background: #f7faf4; border-radius: 8px; border-left: 3px solid #7fad39;">
-                                                <span class="badge badge-success mb-2" style="background-color: #7fad39; font-size: 11px;">STEP 02</span>
+                                            <div class="p-3 h-100" style="background: #faf8f4; border-radius: 8px; border-left: 3px solid #b8975a;">
+                                                <span class="badge mb-2" style="background-color: #b8975a; font-size: 11px;">STEP 02</span>
                                                 <h6 style="font-size: 14px; font-weight: 700; margin-bottom: 6px;">Mindful Application</h6>
                                                 <p class="mb-0 text-muted" style="font-size: 13px;">Gently massage onto damp skin or hair using smooth, upward circular motions. Breathe in the natural aromatherapeutic notes of bergamot, rosemary, and sage.</p>
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
-                                            <div class="p-3 h-100" style="background: #f7faf4; border-radius: 8px; border-left: 3px solid #7fad39;">
-                                                <span class="badge badge-success mb-2" style="background-color: #7fad39; font-size: 11px;">STEP 03</span>
+                                            <div class="p-3 h-100" style="background: #faf8f4; border-radius: 8px; border-left: 3px solid #b8975a;">
+                                                <span class="badge mb-2" style="background-color: #b8975a; font-size: 11px;">STEP 03</span>
                                                 <h6 style="font-size: 14px; font-weight: 700; margin-bottom: 6px;">Absorb &amp; Lock In</h6>
                                                 <p class="mb-0 text-muted" style="font-size: 13px;">Allow active plant ceramides to absorb for 2–3 minutes before rinsing thoroughly with lukewarm water, or leave on as a silky botanical protective barrier.</p>
                                             </div>
@@ -163,7 +165,7 @@
                                     </div>
 
                                     <div class="p-3" style="background: #fafafa; border-radius: 6px; font-size: 13px; color: #555;">
-                                        <i class="fa fa-info-circle text-success mr-2"></i>
+                                        <i class="fa fa-info-circle mr-2" style="color: #b8975a;"></i>
                                         <strong>Botanical Care Note:</strong> Safe for daily morning and evening use. Formulated for all skin and hair types including sensitive skin. Store in a cool, dry area away from direct sunlight.
                                     </div>
                                 </div>
@@ -174,7 +176,7 @@
                                     <div class="media mb-4 p-3" style="background: #fafafa; border-radius: 8px;">
                                         <div class="media-body">
                                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                                <h6 class="mt-0 mb-0">Sophia M. <span class="badge badge-success ml-2" style="font-size: 11px;">Verified Buyer</span></h6>
+                                                <h6 class="mt-0 mb-0">Sophia M. <span class="badge ml-2" style="font-size: 11px; background-color: #b8975a; color: #ffffff;">Verified Buyer</span></h6>
                                                 <small class="text-muted">2 days ago</small>
                                             </div>
                                             <div class="mb-2">
@@ -190,7 +192,7 @@
                                     <div class="media p-3" style="background: #fafafa; border-radius: 8px;">
                                         <div class="media-body">
                                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                                <h6 class="mt-0 mb-0">David L. <span class="badge badge-success ml-2" style="font-size: 11px;">Verified Buyer</span></h6>
+                                                <h6 class="mt-0 mb-0">David L. <span class="badge ml-2" style="font-size: 11px; background-color: #b8975a; color: #ffffff;">Verified Buyer</span></h6>
                                                 <small class="text-muted">1 week ago</small>
                                             </div>
                                             <div class="mb-2">

@@ -209,6 +209,15 @@
         return saved === 'km' ? 'km' : 'en';
     }
 
+    var FLAG_SVGS = {
+        en: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="18" height="12" style="border-radius:2px;vertical-align:middle;margin-right:5px;flex-shrink:0;box-shadow:0 0 0 1px rgba(0,0,0,0.08);"><clipPath id="uk-c"><path d="M0,0 v30 h60 v-30 z"/></clipPath><g clip-path="url(#uk-c)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg>',
+        km: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 36" width="18" height="12" style="border-radius:2px;vertical-align:middle;margin-right:5px;flex-shrink:0;box-shadow:0 0 0 1px rgba(0,0,0,0.08);"><rect width="60" height="36" fill="#032EA1"/><rect y="9" width="60" height="18" fill="#E00025"/><path d="M21,23 h18 v-2 h-2 v-3 h-2 v-2 h-2 v-3 h-1 v-2 h-2 v2 h-1 v3 h-2 v2 h-2 v3 h-2 z" fill="#fff"/></svg>'
+    };
+
+    function getFlagMarkup(lang) {
+        return FLAG_SVGS[lang] || FLAG_SVGS.en;
+    }
+
     function setAppLanguage(lang) {
         if (lang !== 'en' && lang !== 'km') {
             lang = 'en';
@@ -227,10 +236,23 @@
         var currentLabels = document.querySelectorAll('.js-current-lang-label');
         currentLabels.forEach(function (el) {
             var isShort = el.getAttribute('data-lang-format') === 'short';
-            if (isShort) {
-                el.textContent = lang === 'km' ? '🇰🇭 KH' : '🇬🇧 EN';
-            } else {
-                el.textContent = lang === 'km' ? '🇰🇭 ភាសាខ្មែរ' : '🇬🇧 English';
+            var text = isShort ? (lang === 'km' ? 'KH' : 'EN') : (lang === 'km' ? 'ភាសាខ្មែរ' : 'English');
+            el.innerHTML = getFlagMarkup(lang) + '<span>' + text + '</span>';
+            el.style.display = 'inline-flex';
+            el.style.alignItems = 'center';
+        });
+
+        // Ensure dropdown options always display crisp SVG flags across all platforms
+        document.querySelectorAll('.header__top__right__language ul li a').forEach(function (link) {
+            var handler = link.getAttribute('onclick') || '';
+            if (handler.indexOf("'en'") !== -1) {
+                link.innerHTML = getFlagMarkup('en') + 'English';
+                link.style.display = 'flex';
+                link.style.alignItems = 'center';
+            } else if (handler.indexOf("'km'") !== -1) {
+                link.innerHTML = getFlagMarkup('km') + 'ភាសាខ្មែរ';
+                link.style.display = 'flex';
+                link.style.alignItems = 'center';
             }
         });
 
@@ -267,7 +289,7 @@
 
         // If running in live Laravel (not static GitHub Pages), notify server
         if (window.location.hostname.indexOf('github.io') === -1) {
-            fetch('/lang/' + lang, { credentials: 'same-origin' }).catch(function () {});
+            fetch('/lang/' + lang, { credentials: 'same-origin' }).catch(function () { });
         }
     }
 

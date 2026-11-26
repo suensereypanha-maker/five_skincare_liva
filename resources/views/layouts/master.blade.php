@@ -46,7 +46,7 @@
     @if(session('success') || session('error') || session('info') || $errors->any())
         <div class="container pt-3">
             @if(session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert" style="background-color: #eaf5ea; color: #2e6930; border-color: #c3e6cb; border-radius: 6px;">
+                <div class="alert alert-success alert-dismissible fade show" role="alert" style="background-color: #f7f3eb; color: #8f713b; border-color: #dfd3bc; border-radius: 6px;">
                     <i class="fa fa-check-circle mr-2"></i> {{ session('success') }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -122,7 +122,7 @@
     </script>
 
     <div id="cart-toast" role="status" aria-live="polite"
-        style="display:none; position:fixed; top:25px; right:25px; z-index:99999; min-width:280px; max-width:420px; background:#1F2421; color:#fff; border-left:5px solid #7fad39; border-radius:8px; padding:14px 20px; box-shadow:0 8px 24px rgba(0,0,0,.25); font-size:14px;">
+        style="display:none; position:fixed; top:25px; right:25px; z-index:99999; min-width:280px; max-width:420px; background:#1F2421; color:#fff; border-left:5px solid #b8975a; border-radius:8px; padding:14px 20px; box-shadow:0 8px 24px rgba(0,0,0,.25); font-size:14px;">
     </div>
 
     <script>
@@ -257,7 +257,7 @@
                 var toast = document.getElementById('cart-toast');
                 if (!toast) return;
                 toast.innerHTML = htmlContent;
-                toast.style.borderLeftColor = isError ? '#dc3545' : '#7fad39';
+                toast.style.borderLeftColor = isError ? '#dc3545' : '#b8975a';
                 toast.style.display = 'block';
                 window.clearTimeout(toast._hideTimer);
                 toast._hideTimer = window.setTimeout(function () {
@@ -313,7 +313,7 @@
                     showCartToast(
                         '<div><strong>✓ Added to your bag!</strong>' +
                         '<div style="font-size:12px; opacity:0.85; margin:4px 0 10px;">' + name + ' (Qty: ' + quantity + ')</div>' +
-                        '<a href="' + cartUrl + '" style="display:inline-block; background:#7fad39; color:#fff; padding:6px 14px; border-radius:20px; font-weight:700; font-size:12px; text-decoration:none;">View Bag &amp; Checkout &rarr;</a>' +
+                        '<a href="' + cartUrl + '" style="display:inline-block; background:#b8975a; color:#fff; padding:6px 14px; border-radius:20px; font-weight:700; font-size:12px; text-decoration:none;">View Bag &amp; Checkout &rarr;</a>' +
                         '</div>',
                         false
                     );
@@ -346,7 +346,7 @@
                     showCartToast(
                         '<div><strong>✓ ' + data.message + '</strong>' +
                         '<div style="margin-top:8px;">' +
-                        '<a href="' + cartUrl + '" style="display:inline-block; background:#7fad39; color:#fff; padding:6px 14px; border-radius:20px; font-weight:700; font-size:12px; text-decoration:none;">View Bag &amp; Checkout &rarr;</a>' +
+                        '<a href="' + cartUrl + '" style="display:inline-block; background:#b8975a; color:#fff; padding:6px 14px; border-radius:20px; font-weight:700; font-size:12px; text-decoration:none;">View Bag &amp; Checkout &rarr;</a>' +
                         '</div></div>',
                         false
                     );
@@ -357,7 +357,7 @@
                     showCartToast(
                         '<div><strong>✓ Added to your bag!</strong>' +
                         '<div style="font-size:12px; opacity:0.85; margin:4px 0 10px;">' + name + ' (Qty: ' + quantity + ')</div>' +
-                        '<a href="' + cartUrl + '" style="display:inline-block; background:#7fad39; color:#fff; padding:6px 14px; border-radius:20px; font-weight:700; font-size:12px; text-decoration:none;">View Bag &amp; Checkout &rarr;</a>' +
+                        '<a href="' + cartUrl + '" style="display:inline-block; background:#b8975a; color:#fff; padding:6px 14px; border-radius:20px; font-weight:700; font-size:12px; text-decoration:none;">View Bag &amp; Checkout &rarr;</a>' +
                         '</div>',
                         false
                     );
@@ -395,7 +395,7 @@
                 scrollBtn.style.transform = 'translateY(-3px)';
             });
             scrollBtn.addEventListener('mouseleave', function () {
-                scrollBtn.style.backgroundColor = '#7fad39';
+                scrollBtn.style.backgroundColor = '#b8975a';
                 scrollBtn.style.transform = 'translateY(0)';
             });
         }());
@@ -403,7 +403,7 @@
 
     <!-- Scroll to Top Button -->
     <button type="button" id="scrollToTopBtn" aria-label="Scroll to top" title="Scroll to top"
-        style="display: none; position: fixed; bottom: 30px; right: 30px; z-index: 9999; width: 44px; height: 44px; border-radius: 50%; background: #7fad39; color: #fff; border: none; outline: none; cursor: pointer; box-shadow: 0 4px 14px rgba(127, 173, 57, 0.45); transition: all 0.25s ease; align-items: center; justify-content: center; font-size: 20px;">
+        style="display: none; position: fixed; bottom: 30px; right: 30px; z-index: 9999; width: 44px; height: 44px; border-radius: 50%; background: #b8975a; color: #fff; border: none; outline: none; cursor: pointer; box-shadow: 0 4px 14px rgba(184, 151, 90, 0.45); transition: all 0.25s ease; align-items: center; justify-content: center; font-size: 20px;">
         <i class="fa fa-angle-up"></i>
     </button>
 

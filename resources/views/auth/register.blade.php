@@ -19,7 +19,7 @@
                 <div class="col-lg-5 col-md-8">
                     <div class="card border-0 shadow-sm p-4 p-md-5" style="border-radius: 12px; background: #fff;">
                         <div class="text-center mb-4">
-                            <img src="{{ asset('img/favicon.svg') }}" alt="LIVA" style="height: 48px; width: 48px; border-radius: 8px; margin-bottom: 12px;">
+                            <img src="{{ asset('img/liva-logo.webp') }}" alt="LIVA" style="height: 56px; width: auto; object-fit: contain; margin-bottom: 12px;">
                             <h3 style="font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; color: #1F2421;" data-i18n="join_title">Join LIVA Botanical</h3>
                             <p class="text-muted" style="font-size: 14px;" data-i18n="join_subtitle">Unlock personalized skincare rituals &amp; exclusive member perks</p>
                         </div>
@@ -104,7 +104,7 @@
 
                         <div class="text-center mt-4 pt-3 border-top">
                             <span class="text-muted" style="font-size: 14px;" data-i18n="have_account">Already have an account?</span>
-                            <a href="{{ route('login') }}" style="color: #7fad39; font-weight: 700; margin-left: 5px;" data-i18n="sign_in_here">Sign in here</a>
+                            <a href="{{ route('login') }}" style="color: #b8975a; font-weight: 700; margin-left: 5px;" data-i18n="sign_in_here">Sign in here</a>
                         </div>
                     </div>
                 </div>

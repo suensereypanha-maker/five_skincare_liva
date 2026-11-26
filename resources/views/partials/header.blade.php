@@ -46,7 +46,7 @@
                                     <i class="fa fa-user mr-1"></i> <span data-i18n="login">Login</span>
                                 </a>
                                 <span style="margin: 0 8px; color: #bbb; font-weight: 400;">/</span>
-                                <a href="{{ route('register') }}" style="display: inline-block; font-size: 14px; font-weight: 600; color: #7fad39; text-decoration: none;" data-i18n="register">
+                                <a href="{{ route('register') }}" style="display: inline-block; font-size: 14px; font-weight: 600; color: #b8975a; text-decoration: none;" data-i18n="register">
                                     Register
                                 </a>
                             @endauth
@@ -60,9 +60,8 @@
         <div class="row align-items-center">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="{{ route('home') }}" class="d-flex align-items-center" style="gap: 10px; text-decoration: none;">
-                        <img src="{{ asset('img/favicon.svg') }}" alt="LIVA" style="max-height: 44px; width: 44px; border-radius: 8px;">
-                        <span style="font-size: 26px; font-weight: 700; letter-spacing: 0.12em; color: #1F2421; font-family: 'Cormorant Garamond', Georgia, serif;">LIVA</span>
+                    <a href="{{ route('home') }}" class="d-flex align-items-center" style="text-decoration: none;">
+                        <img src="{{ asset('img/liva-logo.webp') }}" alt="LIVA Botanical Skincare" style="max-height: 48px; width: auto; object-fit: contain;">
                     </a>
                 </div>
             </div>
